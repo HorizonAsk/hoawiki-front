@@ -4,7 +4,9 @@
       <v-col cols="12">
         <v-img :src="logo" class="my-3" contain height="200" />
       </v-col>
-
+      <v-col cols="12">
+        <div>getMessage: {{ message }}</div>
+      </v-col>
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
           Welcome to Vuetify V3 Alpha
@@ -73,12 +75,25 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import logo from "../assets/logo.svg";
+import apiClient from "@/utils/axios";
+import Message from "@/components/Message/index";
 
 export default defineComponent({
   name: "HelloWorld",
-
+  mounted: function () {
+    apiClient
+      .get("/message")
+      .then((res) => {
+        Message.info("Debug");
+        this.message = res.message;
+      })
+      .catch(() => {
+        Message.error("Wrong!");
+      });
+  },
   data() {
     return {
+      message: "Init",
       ecosystem: [
         {
           text: "vuetify-loader",
