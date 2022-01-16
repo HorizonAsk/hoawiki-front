@@ -2,11 +2,13 @@
   <div class="message">
     <template v-for="(item, index) in $store.state.msgPool" :key="index">
       <div class="d-flex justify-center" transition="slide-y-transition">
-        <template v-if="item.light === false" transition="scale-transition">
+        <template v-if="item.elevation === 0" transition="scale-transition">
           <v-alert :type="item.type" dense>{{ item.message }}</v-alert>
         </template>
-        <template v-if="item.light === true" transition="scale-transition">
-          <v-alert :type="item.type" dense outlined>{{ item.message }}</v-alert>
+        <template v-if="item.elevation !== 0" transition="fade-transition">
+          <v-alert :elevation="item.elevation" :type="item.type" dense
+            >{{ item.message }}
+          </v-alert>
         </template>
       </div>
     </template>
