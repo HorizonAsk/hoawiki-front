@@ -75,20 +75,21 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import logo from "../assets/logo.svg";
-import apiClient from "@/utils/axios";
+import axios from "@/utils/axios";
 import Message from "@/components/Message/index";
 
 export default defineComponent({
   name: "HelloWorld",
   mounted: function () {
-    apiClient
+    axios
       .get("/message")
       .then((res) => {
+        console.log("Message got res as ", res);
         Message.info("Debug");
-        this.message = res.message;
+        this.message = res.data.msg;
       })
       .catch(() => {
-        Message.error("Wrong!");
+        Message.error("访问/message失败");
       });
   },
   data() {

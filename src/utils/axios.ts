@@ -20,20 +20,21 @@ apiClient.defaults.headers.common["token"] = localGet("token") || "";
 apiClient.defaults.headers.post["Content-Type"] = "application/json";
 
 // 请求拦截器，内部根据返回值，重新组装，统一管理。
-apiClient.interceptors.response.use((res) => {
-  if (typeof res.data !== "object") {
-    Message.error("服务端异常！");
-    return Promise.reject(res);
-  }
-  if (res.data.resultCode != 200) {
-    if (res.data.message) Message.info(res.data.message);
-    if (res.data.resultCode == 419) {
-      Message.warning("需要登陆！");
+apiClient.interceptors.response.use(
+  (res) => {
+    console.log("axios got res as", res);
+    return res;
+  },
+  (error) => {
+    if (error.response.data.apiCode == 10401) {
+      Message.error("需要登陆！");
       // router.push({ path: "/login" });
+    } else {
+      if (error.response.data.message)
+        Message.warning(error.response.data.message);
     }
-    return Promise.reject(res.data);
+    return Promise.reject();
   }
-  return res.data;
-});
+);
 
 export default apiClient;
