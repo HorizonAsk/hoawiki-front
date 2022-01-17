@@ -1,6 +1,9 @@
 <template>
   <div class="message">
-    <template v-for="(item, index) in $store.state.msgPool" :key="index">
+    <template
+      v-for="(item, index) in $store.state.message.msgPool"
+      :key="index"
+    >
       <div class="d-flex justify-center" transition="slide-y-transition">
         <template v-if="item.elevation === 0" transition="scale-transition">
           <v-alert :type="item.type" dense>{{ item.message }}</v-alert>

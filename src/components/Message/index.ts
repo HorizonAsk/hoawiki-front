@@ -3,7 +3,7 @@ import store from "@/store";
 export default {
   // success
   success(message: string, time = 3000, elevation = 4): void {
-    store.commit("message", {
+    store.commit("message/setMessage", {
       type: "success",
       message: message,
       time: time,
@@ -12,7 +12,7 @@ export default {
   },
   // error
   error(message: string, time = 3000, elevation = 4): void {
-    store.commit("message", {
+    store.commit("message/setMessage", {
       type: "error",
       message: message,
       time: time,
@@ -21,7 +21,7 @@ export default {
   },
   // info
   info(message: string, time = 3000, elevation = 4): void {
-    store.commit("message", {
+    store.commit("message/setMessage", {
       type: "info",
       message: message,
       time: time,
@@ -30,7 +30,7 @@ export default {
   },
   // warning
   warning(message: string, time = 3000, elevation = 4): void {
-    store.commit("message", {
+    store.commit("message/setMessage", {
       type: "warning",
       message: message,
       time: time,

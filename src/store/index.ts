@@ -1,19 +1,24 @@
-import { createStore } from "vuex";
-import { MessageData } from "@/components/Message/index.d.ts";
+import { createStore, Store } from "vuex";
+import { messageStore } from "@/store/modules/message.ts";
 
-const msgPoolArr: MessageData[] = [];
+declare module "@vue/runtime-core" {
+  // 声明自己的 store state
+  interface State {
+    count: number;
+  }
+
+  // 为 `this.$store` 提供类型声明
+  interface ComponentCustomProperties {
+    $store: Store<State>;
+  }
+}
+
 export default createStore({
   state: {
-    msgPool: msgPoolArr,
+    authenticateToken: "",
+    logged: false,
   },
-  mutations: {
-    message(state, step: MessageData) {
-      state.msgPool.push(step);
-      setTimeout(() => {
-        state.msgPool.shift();
-      }, step.time);
-    },
-  },
+  mutations: {},
   actions: {},
-  modules: {},
+  modules: { message: messageStore },
 });
