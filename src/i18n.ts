@@ -1,4 +1,4 @@
-import { createI18n } from "vue-i18n/index";
+import { createI18n } from "vue-i18n";
 import messages from "@intlify/vite-plugin-vue-i18n/messages";
 
 /**
@@ -7,8 +7,6 @@ import messages from "@intlify/vite-plugin-vue-i18n/messages";
  * The loaded `JSON` locale messages is pre-compiled by `@intlify/vue-i18n-loader`, which is integrated into `vue-cli-plugin-i18n`.
  * See: https://github.com/intlify/vue-i18n-loader#rocket-i18n-resource-pre-compilation
  */
-
-console.log(messages);
 
 export default createI18n({
   legacy: false,

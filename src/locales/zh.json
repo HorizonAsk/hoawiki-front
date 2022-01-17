@@ -1,3 +1,10 @@
 {
-  "SIDE_BAR_MESSAGE": "侧边栏信息"
+  "SIDE_BAR_MESSAGE": "侧边栏信息",
+  "appbar": {
+    "change_language": "语言"
+  },
+  "language": {
+    "en": "英语",
+    "zh": "中文"
+  }
 }
