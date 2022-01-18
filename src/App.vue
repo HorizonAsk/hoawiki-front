@@ -5,10 +5,11 @@
     </v-app-bar>
     <v-navigation-drawer absolute color="grey-darken-2" permanent>
       <HelloI18n></HelloI18n>
+      <HelloWorld></HelloWorld>
     </v-navigation-drawer>
     <v-main>
       <Message></Message>
-      <HelloWorld />
+      <router-view></router-view>
       <v-footer> </v-footer>
     </v-main>
   </v-app>

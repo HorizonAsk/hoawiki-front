@@ -6,5 +6,15 @@
   "language": {
     "en": "英语",
     "zh": "中文"
+  },
+  "auth": {
+    "login": {
+      "login_button_name": "登录",
+      "register_button_name": "注册",
+      "login_failed": "登陆失败，请检查您的用户名和密码。"
+    },
+    "logged": {
+      "logout_button_name": "退出"
+    }
   }
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 import Message from "@/components/Message";
 // import router from "@/router/index";
-import { localGet } from "./index";
 import config from "../../config";
+import store from "@/store";
 
 const apiClient = axios.create({
   timeout: 1000,
@@ -15,14 +15,15 @@ apiClient.defaults.baseURL = config[import.meta.env.MODE].baseUrl;
 apiClient.defaults.withCredentials = true;
 // 请求头，headers 信息
 apiClient.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-apiClient.defaults.headers.common["token"] = localGet("token") || "";
+apiClient.defaults.headers.common["Authorization"] =
+  store.state.user.accessToken;
 // 默认 post 请求，使用 application/json 形式
 apiClient.defaults.headers.post["Content-Type"] = "application/json";
 
 // 请求拦截器，内部根据返回值，重新组装，统一管理。
 apiClient.interceptors.response.use(
   (res) => {
-    console.log("axios got res as", res);
+    console.debug("axios got res as", res);
     return res;
   },
   (error) => {

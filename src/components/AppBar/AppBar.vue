@@ -21,7 +21,7 @@
 
 <script>
 import LocaleChanger from "@/components/LocaleChanger.vue";
-import UserPanel from "@/components/UserPanel/UserPanel.vue";
+import UserPanel from "@/components/AppBar/UserPanel/UserPanel.vue";
 import hoalogo from "@/assets/hoalogo.jpg";
 
 export default {

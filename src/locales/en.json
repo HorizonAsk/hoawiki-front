@@ -7,5 +7,15 @@
   "language": {
     "en": "English",
     "zh": "Chinese"
+  },
+  "auth": {
+    "login": {
+      "login_button_name": "Sign in",
+      "register_button_name": "Sign up",
+      "login_failed": "Login Failed. Please check your email and password."
+    },
+    "logged": {
+      "logout_button_name": "Sign out"
+    }
   }
 }

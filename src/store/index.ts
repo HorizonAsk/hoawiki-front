@@ -1,5 +1,6 @@
 import { createStore, Store } from "vuex";
 import { messageStore } from "@/store/modules/message.ts";
+import { userStore } from "@/store/modules/user.ts";
 
 declare module "@vue/runtime-core" {
   // 声明自己的 store state
@@ -14,11 +15,11 @@ declare module "@vue/runtime-core" {
 }
 
 export default createStore({
-  state: {
-    authenticateToken: "",
-    logged: false,
-  },
+  state: {},
   mutations: {},
   actions: {},
-  modules: { message: messageStore },
+  modules: {
+    message: messageStore,
+    user: userStore,
+  },
 });

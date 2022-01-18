@@ -6,6 +6,7 @@
       </v-col>
       <v-col cols="12">
         <div>getMessage: {{ message }}</div>
+        <div>Log Status: {{ $store.getters["user/isLoggedIn"] }}</div>
       </v-col>
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
@@ -85,7 +86,8 @@ export default defineComponent({
       .get("/message")
       .then((res) => {
         console.log("Message got res as ", res);
-        Message.info("Debug");
+        Message.info("Message got res as " + res.data.message);
+        console.log();
         this.message = res.data.msg;
       })
       .catch(() => {
