@@ -9,7 +9,6 @@ declare module "vue" {
     ElAside: typeof import("element-plus/es")["ElAside"];
     ElButton: typeof import("element-plus/es")["ElButton"];
     ElCard: typeof import("element-plus/es")["ElCard"];
-    ElCheckbox: typeof import("element-plus/es")["ElCheckbox"];
     ElCol: typeof import("element-plus/es")["ElCol"];
     ElConfigProvider: typeof import("element-plus/es")["ElConfigProvider"];
     ElContainer: typeof import("element-plus/es")["ElContainer"];
@@ -24,6 +23,7 @@ declare module "vue" {
     ElMain: typeof import("element-plus/es")["ElMain"];
     ElMenu: typeof import("element-plus/es")["ElMenu"];
     ElMenuItem: typeof import("element-plus/es")["ElMenuItem"];
+    ElPageHeader: typeof import("element-plus/es")["ElPageHeader"];
     ElRow: typeof import("element-plus/es")["ElRow"];
     ElScrollbar: typeof import("element-plus/es")["ElScrollbar"];
     ElSpace: typeof import("element-plus/es")["ElSpace"];

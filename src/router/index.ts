@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import SpecialPagesRoutes from "./specialPagesRoutes";
+import ConceptPagesRoutes from "@/router/ConceptPagesRoutes";
 
 const routes = [
   {
@@ -14,6 +15,7 @@ const routes = [
 ];
 
 SpecialPagesRoutes.forEach((route) => routes.push(route));
+ConceptPagesRoutes.forEach((route) => routes.push(route));
 
 const router = createRouter({
   routes,

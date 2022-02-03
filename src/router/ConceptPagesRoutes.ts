@@ -1,9 +1,16 @@
 export default [
   {
     path: "/pages/",
-    component: () => import("@/views/SpecialPages/LoginPage.vue"),
+    component: () => import("@/views/PageList.vue"),
     meta: {
-      title: "LoginPage",
+      title: "pageList",
+    },
+  },
+  {
+    path: "/pages/:id",
+    component: () => import("@/views/ConceptPage.vue"),
+    meta: {
+      title: "page",
     },
   },
 ];
