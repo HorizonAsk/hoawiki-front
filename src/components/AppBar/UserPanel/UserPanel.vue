@@ -1,42 +1,64 @@
 <template>
-  <v-menu>
-    <template v-slot:activator="{ props }">
-      <v-btn v-if="$store.getters['user/isLoggedIn']" v-bind="props">
-        <v-icon> mdi-account-details</v-icon>
-      </v-btn>
-      <v-btn v-else v-bind="props">
-        <v-icon> mdi-account-plus</v-icon>
-      </v-btn>
+  <el-sub-menu class="el-sub-menu__title el-sub-menu__hide-arrow" index="3">
+    <template #title>
+      <div v-if="$store.getters['user/isLoggedIn']">
+        <el-icon>
+          <user />
+        </el-icon>
+      </div>
+      <div v-else>
+        <el-icon>
+          <user-filled />
+        </el-icon>
+      </div>
     </template>
-    <div>
-      <v-card right top>
-        <v-list v-if="$store.getters['user/isLoggedIn']">
-          <v-list-item v-for="item in items.Logged" :key="item.title">
-            <v-btn @click="item.action">
-              <v-icon>{{ item.icon }}</v-icon>
-              <v-list-item-title>{{ t(item.title) }}</v-list-item-title>
-            </v-btn>
-          </v-list-item>
-        </v-list>
-        <v-list v-else>
-          <v-list-item v-for="item in items.NotLogged" :key="item.title">
-            <v-btn @click="item.action">
-              <v-icon>{{ item.icon }}</v-icon>
-              <v-list-item-title>{{ t(item.title) }}</v-list-item-title>
-            </v-btn>
-          </v-list-item>
-        </v-list>
-      </v-card>
+    <div v-if="$store.getters['user/isLoggedIn']">
+      <el-menu-item
+        v-for="item in items.Logged"
+        :key="item.title"
+        @click="item.action"
+      >
+        <el-icon>
+          <component v-bind:is="item.icon"></component>
+        </el-icon>
+        {{ t(item.title) }}
+      </el-menu-item>
     </div>
-  </v-menu>
+    <div v-else>
+      <el-menu-item
+        v-for="item in items.NotLogged"
+        :key="item.title"
+        @click="item.action"
+      >
+        <el-icon>
+          <component v-bind:is="item.icon"></component>
+        </el-icon>
+        {{ t(item.title) }}
+      </el-menu-item>
+    </div>
+  </el-sub-menu>
 </template>
 
 <script>
 import { useI18n } from "vue-i18n";
 import store from "@/store";
+import {
+  User,
+  UserFilled,
+  Plus,
+  SwitchButton,
+  Avatar,
+} from "@element-plus/icons-vue";
 
 export default {
   name: "UserPanel",
+  components: {
+    User,
+    UserFilled,
+    Plus,
+    SwitchButton,
+    Avatar,
+  },
   setup: () => {
     const { t } = useI18n({
       useScope: "global",
@@ -49,19 +71,19 @@ export default {
         Logged: [
           {
             title: "auth.logged.logout_button_name",
-            icon: "mdi-account-off",
+            icon: "SwitchButton",
             action: this.LogOut,
           },
         ],
         NotLogged: [
           {
             title: "auth.login.login_button_name",
-            icon: "mdi-account-box",
+            icon: "plus",
             action: this.ToLoginPage,
           },
           {
             title: "auth.login.register_button_name",
-            icon: "mdi-account-edit",
+            icon: "Avatar",
             action: this.ToRegisterPage,
           },
         ],

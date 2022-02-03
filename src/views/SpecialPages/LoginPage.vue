@@ -1,100 +1,111 @@
 <template>
   <div v-if="$store.getters['user/isLoggedIn']" class="text-center">
-    <h1>您已登录</h1>
-    <h3>页面将跳转至首页。</h3>
+    <div v-html="t('auth.login.logged_message')"></div>
     <meta content="5; URL=/" http-equiv="refresh" />
   </div>
   <div v-else class="text-center">
-    <v-card>
-      <v-card-text> 登录</v-card-text>
-      <form>
-        <v-text-field
-          v-model="userEmail"
-          :error-messages="userEmailErrors"
-          label="E-mail"
-          required
-          @blur="v$.userEmail.$touch()"
-          @input="v$.userEmail.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="password"
-          :counter="20"
-          :error-messages="passwordErrors"
-          label="password"
-          required
-          type="password"
-          @blur="v$.password.$touch()"
-          @input="v$.password.$touch()"
-        ></v-text-field>
-        <v-btn class="mr-4" @click="submit"> submit</v-btn>
-        <v-btn @click="clear"> clear</v-btn>
-      </form>
-    </v-card>
+    <el-space>
+      <el-card>
+        <template #header>
+          <h1>{{ t("auth.login.login_button_name") }}</h1>
+        </template>
+
+        <el-form
+          ref="formRef"
+          :model="loginForm"
+          :rules="rules"
+          label-width="80px"
+          status-icon
+        >
+          <el-form-item :label="t('auth.login.email')" prop="userEmail">
+            <el-input v-model="loginForm.userEmail"></el-input>
+          </el-form-item>
+          <el-form-item :label="t('auth.login.password')" prop="password">
+            <el-input v-model="loginForm.password" type="password"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submit($refs.formRef)">
+              {{ t("auth.login.submit") }}
+            </el-button>
+            <el-button @click="clear($refs.formRef)">
+              {{ t("auth.login.clear") }}
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+    </el-space>
   </div>
 </template>
-<script>
-import useVuelidate from "@vuelidate/core";
-import { required, maxLength, email, minLength } from "@vuelidate/validators";
+<script lang="ts">
 import store from "@/store";
 import Message from "@/components/Message/index";
+import { useI18n } from "vue-i18n";
+import { reactive } from "vue";
 
 export default {
   name: "LoginPage",
   setup() {
-    return { v$: useVuelidate() };
-  },
-  validations() {
-    return {
-      userEmail: { required, email },
-      password: { required, minLength: minLength(6), maxLength: maxLength(20) },
-    };
+    const { t } = useI18n({
+      // inheritLocale: true,
+      useScope: "global",
+    });
+    const rules = reactive({
+      userEmail: [
+        {
+          required: true,
+          message: t("validation.email_must_given"),
+          trigger: ["blur"],
+        },
+        {
+          type: "email",
+          message: t("validation.email_incorrect"),
+          trigger: ["blur", "change"],
+        },
+      ],
+      password: [
+        {
+          required: true,
+          message: t("validation.password_must_given"),
+          trigger: ["blur"],
+        },
+        {
+          min: 8,
+          max: 40,
+          message: t("validation.password_length_wrong"),
+          trigger: ["blur", "change"],
+        },
+      ],
+    });
+    return { t, rules };
   },
   data: () => ({
-    userEmail: "",
-    password: "",
+    loginForm: {
+      userEmail: "",
+      password: "",
+    },
     jumpTime: 5,
   }),
-
-  computed: {
-    userEmailErrors() {
-      const errors = [];
-      if (!this.v$.userEmail.$dirty) return errors;
-      !this.v$.userEmail.email && errors.push("Must be valid e-mail");
-      !this.v$.userEmail.required && errors.push("E-mail is required");
-      return errors;
-    },
-    passwordErrors() {
-      const errors = [];
-      if (!this.v$.password.$dirty) return errors;
-      !this.v$.password.minLength &&
-        errors.push("Password must be at least 6 characters long");
-      !this.v$.password.maxLength &&
-        errors.push("Password must be at most 20 characters long");
-      !this.v$.password.required && errors.push("Password is required.");
-      return errors;
-    },
-  },
   methods: {
-    async submit() {
-      const isValid = await this.v$.$validate();
-      if (!isValid) {
-        Message.warning("Check your information!");
-        return false;
-      } else {
-        console.log({
-          password: this.password,
-          userEmail: this.userEmail,
-        });
-        store.commit("user/setUserLogin", {
-          password: this.password,
-          userEmail: this.userEmail,
-        });
-      }
+    submit(formIs): void {
+      if (!formIs) return;
+      formIs.validate((isValid) => {
+        if (!isValid) {
+          Message.error("Check your information!");
+        } else {
+          console.debug({
+            password: this.loginForm.password,
+            userEmail: this.loginForm.userEmail,
+          });
+          store.commit("user/setUserLogin", {
+            password: this.loginForm.password,
+            userEmail: this.loginForm.userEmail,
+          });
+        }
+      });
     },
-    clear() {
-      this.v$.$reset();
-      this.userEmail = "";
-      this.password = "";
+    clear(formIs): void {
+      if (!formIs) return;
+      formIs.resetFields();
     },
   },
 };

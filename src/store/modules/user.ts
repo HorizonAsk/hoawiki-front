@@ -5,6 +5,8 @@ import {
 } from "@/services/auth.service";
 import { AxiosResponse } from "axios";
 import Message from "@/components/Message/index";
+import { ApiResponse } from "@/utils/apiResponse";
+import router from "@/router";
 
 import i18n from "@/i18n.ts";
 
@@ -35,8 +37,15 @@ export const userStore = {
           state.accessToken = res.data.jwt;
           localStorage.setItem("accessToken", res.data.jwt);
         })
-        .catch(() => {
-          Message.error(t("auth.login.login_failed"));
+        .catch((error) => {
+          if (
+            error.response.data.apiCode ==
+            ApiResponse.API_RESPONSE_USERNAME_PASSWORD_ERROR
+          ) {
+            Message.error(t("auth.login.login_failed"));
+          } else {
+            Message.error(error.response.data.message);
+          }
         });
     },
     setUserLogout(state: State): void {
@@ -49,10 +58,21 @@ export const userStore = {
     setUserRegister(state: State, userRegisterInfo: UserRegisterInfo): void {
       AuthService.register(userRegisterInfo)
         .then((res: AxiosResponse) => {
-          console.log(res.data);
+          Message.info(t("auth.register.register_succeed"));
+          router.push("/login");
         })
-        .catch(() => {
-          Message.error(t("auth.register.register_failed"));
+        .catch((error) => {
+          if (
+            error.response.data.apiCode == ApiResponse.API_RESPONSE_USER_EXISTED
+          ) {
+            Message.error(t("auth.register.user_exists"));
+          } else {
+            if (
+              error.response.data.apiCode == ApiResponse.API_RESPONSE_PARAM_BAD
+            ) {
+              Message.error(t("auth.register.register_failed"));
+            }
+          }
         });
     },
   },

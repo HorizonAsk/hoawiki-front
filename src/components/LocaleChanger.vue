@@ -1,55 +1,41 @@
 <template>
-  <v-menu class="mx-auto" offset-y>
-    <template v-slot:activator="{ props }">
-      <v-btn
-        v-model="locale"
-        color="primary"
-        dark
-        min-width="100px"
-        v-bind="props"
-      >
-        {{ t("appbar.change_language") }}
-        <v-icon>mdi-translate</v-icon>
-      </v-btn>
+  <el-sub-menu class="el-sub-menu" offset-y>
+    <template #title>
+      {{ t("appbar.change_language") }}
     </template>
-    <v-card>
-      <v-list class="mx-auto" tile>
-        <v-list-item
-          v-for="(item, index) in messages"
-          :key="index"
-          class="align-center"
-          min-height="30px"
-          min-width="100px"
-          @click="this.changeLang(index)"
-        >
-          <div v-if="index === locale">
-            <v-row>
-              <v-icon>mdi-check</v-icon>
-              <v-list-item-title
-                >{{ t("language." + index) }}
-              </v-list-item-title>
-            </v-row>
-          </div>
-          <div v-else>
-            <v-row>
-              <v-icon>mdi-checkbox-blank-circle-outline</v-icon>
-              <v-list-item-title
-                >{{ t("language." + index) }}
-              </v-list-item-title>
-            </v-row>
-          </div>
-        </v-list-item>
-      </v-list>
-    </v-card>
-  </v-menu>
+    <el-menu-item
+      v-for="(item, index) in messages"
+      :key="index"
+      class="align-center"
+      min-height="30px"
+      min-width="100px"
+      @click="
+        this.changeLang(index);
+        $router.go(0);
+      "
+    >
+      <div v-if="index === locale">
+        <el-icon><Select /></el-icon>
+        {{ t("language." + index) }}
+      </div>
+      <div v-else>
+        <el-icon></el-icon>
+        {{ t("language." + index) }}
+      </div>
+    </el-menu-item>
+  </el-sub-menu>
 </template>
 
 <script lang="ts">
 import { useI18n } from "vue-i18n";
 import messages from "@intlify/vite-plugin-vue-i18n/messages";
+import { Select } from "@element-plus/icons-vue";
 
 export default {
   name: "LocaleChanger",
+  components: {
+    Select,
+  },
   setup: () => {
     const { locale, t } = useI18n({
       // inheritLocale: true,

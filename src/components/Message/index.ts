@@ -1,40 +1,32 @@
-import store from "@/store";
+import { ElMessage } from "element-plus";
 
 export default {
   // success
-  success(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "success",
-      message: message,
-      time: time,
-      elevation: elevation,
+  success(message: string): void {
+    ElMessage({
+      message,
+      type: "success"
     });
   },
   // error
-  error(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "error",
-      message: message,
-      time: time,
-      elevation: elevation,
+  error(message: string): void {
+    ElMessage({
+      message,
+      type: "error"
     });
   },
   // info
-  info(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "info",
-      message: message,
-      time: time,
-      elevation: elevation,
+  info(message: string): void {
+    ElMessage({
+      message,
+      type: "info"
     });
   },
   // warning
-  warning(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "warning",
-      message: message,
-      time: time,
-      elevation: elevation,
+  warning(message: string): void {
+    ElMessage({
+      message,
+      type: "warning"
     });
-  },
+  }
 };

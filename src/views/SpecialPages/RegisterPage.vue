@@ -1,139 +1,147 @@
 <template>
   <div class="text-center">
-    <v-card>
-      <v-card-text> 注册</v-card-text>
-      <form>
-        <v-text-field
-          v-model="userNickName"
-          :counter="20"
-          :error-messages="userNickNameErrors"
-          label="Name"
-          required
-          @blur="v$.userNickName.$touch()"
-          @input="v$.userNickName.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="userEmail"
-          :error-messages="userEmailErrors"
-          label="E-mail"
-          required
-          @blur="v$.userEmail.$touch()"
-          @input="v$.userEmail.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="password"
-          :counter="20"
-          :error-messages="passwordErrors"
-          label="password"
-          required
-          type="password"
-          @blur="v$.password.$touch()"
-          @input="v$.password.$touch()"
-        ></v-text-field>
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="checkboxErrors"
-          label="Do you agree?"
-          required
-          @blur="v$.checkbox.$touch()"
-          @change="v$.checkbox.$touch()"
-        ></v-checkbox>
-        <v-btn class="mr-4" @click="submit"> submit</v-btn>
-        <v-btn @click="clear"> clear</v-btn>
-      </form>
-    </v-card>
+    <el-space>
+      <el-card>
+        <template #header>
+          <div class="card-header">
+            <h1>{{ t("auth.login.register_button_name") }}</h1>
+          </div>
+          <h5 v-html="t('auth.register.restrictions')"></h5>
+        </template>
+
+        <el-form
+          ref="formRef"
+          :model="registerForm"
+          :rules="rules"
+          label-width="80px"
+          status-icon
+        >
+          <el-form-item :label="t('auth.login.nickname')" prop="userNickName">
+            <el-input v-model="registerForm.userNickName"></el-input>
+          </el-form-item>
+          <el-form-item :label="t('auth.login.email')" prop="userEmail">
+            <el-input v-model="registerForm.userEmail"></el-input>
+          </el-form-item>
+          <el-form-item :label="t('auth.login.password')" prop="password">
+            <el-input
+              v-model="registerForm.password"
+              type="password"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="checkbox">
+            <el-checkbox
+              v-model="registerForm.checkbox"
+              :label="t('auth.login.checked')"
+              size="large"
+            ></el-checkbox>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submit($refs.formRef)">
+              {{ t("auth.login.submit") }}
+            </el-button>
+            <el-button @click="clear($refs.formRef)">
+              {{ t("auth.login.clear") }}
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+    </el-space>
   </div>
 </template>
-<script>
-import useVuelidate from "@vuelidate/core";
-import { required, maxLength, email, minLength } from "@vuelidate/validators";
+<script lang="ts">
 import store from "@/store";
 import Message from "@/components/Message/index";
+import { useI18n } from "vue-i18n";
+import { reactive } from "vue";
 
 export default {
   name: "RegisterPage",
   setup() {
-    return { v$: useVuelidate() };
-  },
-  validations() {
-    return {
-      userNickName: { required, maxLength: maxLength(20) },
-      userEmail: { required, email },
-      password: { required, minLength: minLength(6), maxLength: maxLength(20) },
-      checkbox: {
-        checked(val) {
-          return val;
+    const { t } = useI18n({
+      // inheritLocale: true,
+      useScope: "global",
+    });
+    const rules = reactive({
+      userEmail: [
+        {
+          required: true,
+          message: t("validation.email_must_given"),
+          trigger: ["blur"],
         },
-      },
-    };
+        {
+          type: "email",
+          message: t("validation.email_incorrect"),
+          trigger: ["blur", "change"],
+        },
+      ],
+      password: [
+        {
+          required: true,
+          message: t("validation.password_must_given"),
+          trigger: ["blur"],
+        },
+        {
+          min: 8,
+          max: 40,
+          message: t("validation.password_length_wrong"),
+          trigger: ["blur", "change"],
+        },
+      ],
+      userNickName: [
+        {
+          required: true,
+          message: t("validation.nickname_must_given"),
+          trigger: ["blur"],
+        },
+        {
+          max: 50,
+          message: t("validation.nickname_length_wrong"),
+          trigger: ["blur", "change"],
+        },
+      ],
+      checkbox: [
+        {
+          type: "enum",
+          enum: [true],
+          message: t("validation.checked_must"),
+          trigger: ["blur", "change"],
+        },
+      ],
+    });
+    return { t, rules };
   },
   data: () => ({
-    userNickName: "",
-    userEmail: "",
-    password: "",
-    checkbox: false,
+    registerForm: {
+      userNickName: "",
+      userEmail: "",
+      password: "",
+      checkbox: false,
+    },
   }),
 
-  computed: {
-    checkboxErrors() {
-      const errors = [];
-      if (!this.v$.checkbox.$dirty) return errors;
-      !this.v$.checkbox.checked && errors.push("You must agree to continue!");
-      return errors;
-    },
-    userNickNameErrors() {
-      const errors = [];
-      if (!this.v$.userNickName.$dirty) return errors;
-      !this.v$.userNickName.maxLength &&
-        errors.push("userNickName must be at most 20 characters long");
-      !this.v$.userNickName.required &&
-        errors.push("userNickName is required.");
-      return errors;
-    },
-    userEmailErrors() {
-      const errors = [];
-      if (!this.v$.userEmail.$dirty) return errors;
-      !this.v$.userEmail.email && errors.push("Must be valid e-mail");
-      !this.v$.userEmail.required && errors.push("E-mail is required");
-      return errors;
-    },
-    passwordErrors() {
-      const errors = [];
-      if (!this.v$.password.$dirty) return errors;
-      !this.v$.password.minLength &&
-        errors.push("Password must be at least 6 characters long");
-      !this.v$.password.maxLength &&
-        errors.push("Password must be at most 20 characters long");
-      !this.v$.password.required && errors.push("Password is required.");
-      return errors;
-    },
-  },
-
   methods: {
-    async submit() {
-      const isValid = await this.v$.$validate();
-      if (!isValid) {
-        Message.warning("Check your information!");
-        return false;
-      } else {
-        console.log({
-          password: this.password,
-          userEmail: this.userEmail,
-          userName: this.userNickName,
-        });
-        store.commit("user/setUserRegister", {
-          password: this.password,
-          userEmail: this.userEmail,
-          userName: this.userNickName,
-        });
-      }
+    submit(formIs): void {
+      if (!formIs) return;
+      formIs.validate((isValid) => {
+        if (!isValid) {
+          Message.error(this.t("validation.wrong_validation_common"));
+        } else {
+          console.debug({
+            password: this.registerForm.password,
+            userEmail: this.registerForm.userEmail,
+            userName: this.registerForm.userNickName,
+          });
+          store.commit("user/setUserRegister", {
+            password: this.registerForm.password,
+            userEmail: this.registerForm.userEmail,
+            userName: this.registerForm.userNickName,
+          });
+        }
+      });
     },
-    clear() {
-      this.v$.$reset();
-      this.userNickName = "";
-      this.userEmail = "";
-      this.checkbox = false;
-      this.password = "";
+    clear(formIs): void {
+      if (!formIs) return;
+      formIs.resetFields();
     },
   },
 };

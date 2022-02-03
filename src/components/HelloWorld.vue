@@ -1,81 +1,79 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img :src="logo" class="my-3" contain height="200" />
-      </v-col>
-      <v-col cols="12">
-        <div>getMessage: {{ message }}</div>
-        <div>Log Status: {{ $store.getters["user/isLoggedIn"] }}</div>
-      </v-col>
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify V3 Alpha
-        </h1>
+  <el-row class="center">
+    <el-col cols="12">
+      <el-image :src="logo" />
+    </el-col>
+    <el-col cols="12">
+      <div>getMessage: {{ message }}</div>
+      <div>Log Status: {{ $store.getters["user/isLoggedIn"] }}</div>
+    </el-col>
+    <el-col class="mb-4">
+      <h1 class="display-2 font-weight-bold mb-3">
+        Welcome to Vuetify V3 Alpha
+      </h1>
 
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br />please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank"
-            >Discord Community</a
-          >
-        </p>
-      </v-col>
+      <p class="subheading font-weight-regular">
+        For help and collaboration with other Vuetify developers,
+        <br />please join our online
+        <a href="https://community.vuetifyjs.com" target="_blank"
+        >Discord Community</a
+        >
+      </p>
+    </el-col>
 
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-5">What's next?</h2>
+    <el-col class="mb-5" cols="12">
+      <h2 class="headline font-weight-bold mb-5">What's next?</h2>
 
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
+      <el-row justify="center">
+        <a
+          v-for="(next, i) in whatsNext"
+          :key="i"
+          :href="next.href"
+          class="subheading mx-3"
+          target="_blank"
+        >
+          {{ next.text }}
+        </a>
+      </el-row>
+    </el-col>
 
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-5">Important Links</h2>
+    <el-col class="mb-5" cols="12">
+      <h2 class="headline font-weight-bold mb-5">Important Links</h2>
 
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
+      <el-row justify="center">
+        <a
+          v-for="(link, i) in importantLinks"
+          :key="i"
+          :href="link.href"
+          class="subheading mx-3"
+          target="_blank"
+        >
+          {{ link.text }}
+        </a>
+      </el-row>
+    </el-col>
 
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-5">Ecosystem</h2>
+    <el-col class="mb-5" cols="12">
+      <h2 class="headline font-weight-bold mb-5">Ecosystem</h2>
 
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+      <el-row justify="center">
+        <a
+          v-for="(eco, i) in ecosystem"
+          :key="i"
+          :href="eco.href"
+          class="subheading mx-3"
+          target="_blank"
+        >
+          {{ eco.text }}
+        </a>
+      </el-row>
+    </el-col>
+  </el-row>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import logo from "../assets/logo.svg";
+import logo from "@/assets/logo.svg";
 import axios from "@/utils/axios";
 import Message from "@/components/Message/index";
 

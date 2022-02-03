@@ -11,11 +11,39 @@
   "auth": {
     "login": {
       "login_button_name": "Sign in",
+      "logged_message": "<h1>You have been logged.</h1> <h3>Returning to homepage.</h3>",
       "register_button_name": "Sign up",
-      "login_failed": "Login Failed. Please check your email and password."
+      "login_failed": "Login Failed. Please check your email and password.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Submit",
+      "clear": "Reset",
+      "nickname": "NickName",
+      "checked": "Agree to the Terms of Service"
     },
     "logged": {
       "logout_button_name": "Sign out"
+    },
+    "register": {
+      "register_succeed": "Register Success. Redirect to sign in page.",
+      "register_failed": "Register Failed. Please check your input.",
+      "user_exists": "User exists. Please login or try another email.",
+      "restrictions": "Please use letters, numbers for your nickname. DON'T use emojis. <br> And password should including 8 - 40 letters."
     }
+  },
+  "validation": {
+    "wrong_validation_common": "Check your input",
+    "email_must_given": "Must given email",
+    "email_incorrect": "Incorrect email",
+    "password_must_given": "Must given password",
+    "password_length_wrong": "Wrong length of password",
+    "nickname_must_given": "Must given nickname",
+    "nickname_length_wrong": "Wrong length of nickname",
+    "checked_must": "Must checked"
+  },
+  "exception": {
+    "page_not_found_title": "404 - Page Not Found",
+    "page_not_found_message": "Page not exists.",
+    "page_jump_after_time": "Return to homepage after { jumpTime } seconds."
   }
 }

@@ -1,22 +1,32 @@
 <template>
-  <v-layout class=".flex-nowrap align-center" no-gutters="true">
-    <v-col class="d-flex justify-space-around flex-row align-center" xs="0">
-      <v-img :src="hoalogo" class="my-3" contain height="60" />
-      <v-app-bar-title> HoaWiki</v-app-bar-title>
-    </v-col>
-    <v-col>
-      <v-layout></v-layout>
-    </v-col>
-    <v-col class="d-flex justify-end flex-row">
-      <v-card>
-        <LocaleChanger></LocaleChanger>
-      </v-card>
-      <v-card>
-        <UserPanel></UserPanel>
-      </v-card>
-      <v-card class="bg-transparent" elevation="0" min-width="50"></v-card>
-    </v-col>
-  </v-layout>
+  <el-space
+    direction="horizontal"
+    style="
+      width: 100%;
+      justify-content: space-between;
+      background-color: #ffffff;
+    "
+  >
+    <el-space>
+      <el-image
+        :src="hoalogo"
+        class="el-menu-item"
+        fit="cover"
+        style="height: 60px"
+        @click="$router.push('/')"
+      />
+      <p style="font-size: var(--el-font-size-extra-large)">HoaWiki</p>
+    </el-space>
+    <el-menu
+      :ellipsis="false"
+      class="el-menu"
+      mode="horizontal"
+      style="justify-content: flex-end"
+    >
+      <LocaleChanger></LocaleChanger>
+      <UserPanel></UserPanel>
+    </el-menu>
+  </el-space>
 </template>
 
 <script>
