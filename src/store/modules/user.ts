@@ -31,9 +31,9 @@ export const userStore = {
     setUserLogin(state: State, userLoginPostData: UserLoginPostData): void {
       AuthService.userLogin(userLoginPostData)
         .then((res: AxiosResponse) => {
-          console.log(res.data.data);
-          state.accessToken = res.data.data;
-          localStorage.setItem("accessToken", res.data.data);
+          console.log(res.data.jwt);
+          state.accessToken = res.data.jwt;
+          localStorage.setItem("accessToken", res.data.jwt);
         })
         .catch(() => {
           Message.error(t("auth.login.login_failed"));

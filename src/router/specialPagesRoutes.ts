@@ -1,6 +1,6 @@
-import LoginPage from "@/components/MainPages/SpecialPages/LoginPage.vue";
-import RegisterPage from "@/components/MainPages/SpecialPages/RegisterPage.vue";
-import NotFound from "@/components/MainPages/NotFound.vue";
+import LoginPage from "@/views/SpecialPages/LoginPage.vue";
+import RegisterPage from "@/views/SpecialPages/RegisterPage.vue";
+import NotFound from "@/views/NotFound.vue";
 
 export default [
   {

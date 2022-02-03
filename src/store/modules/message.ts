@@ -10,7 +10,7 @@ export const messageStore = {
     msgPool: [],
   }),
   mutations: {
-    setMessage(state: State, step: MessageData) {
+    setMessage(state: State, step: MessageData): void {
       state.msgPool.push(step);
       setTimeout(() => {
         state.msgPool.shift();

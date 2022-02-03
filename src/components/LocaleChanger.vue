@@ -60,9 +60,15 @@ export default {
   data: () => ({
     messages: messages,
   }),
+  created() {
+    if (localStorage.getItem("locale")) {
+      this.changeLang(localStorage.getItem("locale"));
+    }
+  },
   methods: {
-    changeLang(index: string) {
+    changeLang(index: string): void {
       this.locale = index;
+      localStorage.setItem("locale", index);
     },
   },
 };
