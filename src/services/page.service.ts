@@ -44,4 +44,16 @@ export class PageService {
         return response;
       });
   }
+
+  static getLatestPages(currentPage: number): Promise<AxiosResponse> {
+    return axios
+      .get("page/pages", {
+        params: {
+          currentPage: currentPage,
+        },
+      })
+      .then((response) => {
+        return response;
+      });
+  }
 }

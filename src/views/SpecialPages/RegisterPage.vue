@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center" style="text-align: center">
     <el-space>
       <el-card>
         <template #header>
@@ -49,10 +49,10 @@
   </div>
 </template>
 <script lang="ts">
-import store from "@/store";
 import Message from "@/components/Message/index";
 import { useI18n } from "vue-i18n";
 import { reactive } from "vue";
+import { setUserRegister } from "@/services/api/auth";
 
 export default {
   name: "RegisterPage",
@@ -131,7 +131,7 @@ export default {
             userEmail: this.registerForm.userEmail,
             userName: this.registerForm.userNickName,
           });
-          store.commit("user/setUserRegister", {
+          setUserRegister({
             password: this.registerForm.password,
             userEmail: this.registerForm.userEmail,
             userName: this.registerForm.userNickName,

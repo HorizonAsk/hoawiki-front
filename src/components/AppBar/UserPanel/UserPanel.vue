@@ -49,6 +49,7 @@ import {
   SwitchButton,
   Avatar,
 } from "@element-plus/icons-vue";
+import { setUserLogout } from "@/services/api/auth";
 
 export default {
   name: "UserPanel",
@@ -98,7 +99,7 @@ export default {
       this.$router.push("/register");
     },
     LogOut() {
-      store.commit("user/setUserLogout");
+      setUserLogout();
     },
   },
 };

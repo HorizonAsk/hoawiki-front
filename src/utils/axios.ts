@@ -29,7 +29,11 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     if (error.response.data.apiCode == ApiResponse.API_RESPONSE_UNAUTHORIZED) {
-      Message.error("需要登陆！");
+      if (store.state.user.accessToken) {
+        Message.error("登陆已过期，请重新登陆！");
+      } else {
+        Message.error("需要登陆！");
+      }
       // router.push({ path: "/login" });
     } else {
       if (error.response.data.apiCode in ApiResponse) {

@@ -1,9 +1,13 @@
 <template>
-  <div v-if="$store.getters['user/isLoggedIn']" class="text-center">
+  <div
+    v-if="$store.getters['user/isLoggedIn']"
+    class="text-center"
+    style="text-align: center"
+  >
     <div v-html="t('auth.login.logged_message')"></div>
     <meta content="5; URL=/" http-equiv="refresh" />
   </div>
-  <div v-else class="text-center">
+  <div v-else class="text-center" style="text-align: center">
     <el-space>
       <el-card>
         <template #header>
@@ -37,7 +41,7 @@
   </div>
 </template>
 <script lang="ts">
-import store from "@/store";
+import { setUserLogin } from "@/services/api/auth.ts";
 import Message from "@/components/Message/index";
 import { useI18n } from "vue-i18n";
 import { reactive } from "vue";
@@ -96,7 +100,7 @@ export default {
             password: this.loginForm.password,
             userEmail: this.loginForm.userEmail,
           });
-          store.commit("user/setUserLogin", {
+          setUserLogin({
             password: this.loginForm.password,
             userEmail: this.loginForm.userEmail,
           });
