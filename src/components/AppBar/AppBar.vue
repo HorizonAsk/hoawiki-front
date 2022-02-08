@@ -10,21 +10,20 @@
     <el-space>
       <el-image
         :src="hoalogo"
-        class="el-menu-item"
+        class="el-menu-item nav-bar-item"
         fit="cover"
-        style="height: 60px"
         @click="$router.push('/')"
       />
       <p style="font-size: var(--el-font-size-extra-large)">HoaWiki</p>
     </el-space>
     <el-menu
       :ellipsis="false"
-      class="el-menu"
+      class="el-menu nav-bar-item"
       mode="horizontal"
       style="justify-content: flex-end"
     >
-      <LocaleChanger></LocaleChanger>
-      <UserPanel></UserPanel>
+      <LocaleChanger class="nav-bar-item"></LocaleChanger>
+      <UserPanel class="nav-bar-item"></UserPanel>
     </el-menu>
   </el-space>
 </template>
@@ -49,4 +48,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.nav-bar-item {
+  height: 60px;
+}
+</style>

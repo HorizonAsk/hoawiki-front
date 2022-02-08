@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import SpecialPagesRoutes from "./specialPagesRoutes";
+import SpecialPagesRoutes from "@/router/specialPagesRoutes";
 import ConceptPagesRoutes from "@/router/ConceptPagesRoutes";
 
 const routes = [

@@ -18,6 +18,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import AppBar from "@/components/AppBar/AppBar.vue";
+import "element-plus/theme-chalk/display.css";
 
 const messageConfig = reactive({
   max: 3,
@@ -65,7 +66,7 @@ export default defineComponent({
 
 .common-layout :deep(#body .side-bar) {
   min-width: 240px;
-  max-width: 280px;
+  max-width: 300px;
   color: var(--el-text-color-primary);
   background: #ffffff;
   border-radius: 4px;
@@ -77,7 +78,7 @@ export default defineComponent({
 
 .common-layout :deep(#body .side-bar .el-affix--fixed) {
   min-width: 240px;
-  max-width: 280px;
+  max-width: 300px;
   color: var(--el-text-color-primary);
   background: #ffffff;
   border-right: solid 5px #ffffff;
@@ -96,7 +97,7 @@ export default defineComponent({
 }
 
 .common-layout .el-scrollbar .el-container {
-  width: 950px;
+  max-width: 1020px;
 }
 
 .common-layout .el-menu {

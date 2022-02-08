@@ -2,35 +2,34 @@
 // We suggest you to commit this file into source control
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
-declare module "vue" {
+declare module 'vue' {
   export interface GlobalComponents {
-    AppBar: typeof import("./src/components/AppBar/AppBar.vue")["default"];
-    ElAffix: typeof import("element-plus/es")["ElAffix"];
-    ElAside: typeof import("element-plus/es")["ElAside"];
-    ElCol: typeof import("element-plus/es")["ElCol"];
-    ElContainer: typeof import("element-plus/es")["ElContainer"];
-    ElDivider: typeof import("element-plus/es")["ElDivider"];
-    ElIcon: typeof import("element-plus/es")["ElIcon"];
-    ElImage: typeof import("element-plus/es")["ElImage"];
-    ElLink: typeof import("element-plus/es")["ElLink"];
-    ElMain: typeof import("element-plus/es")["ElMain"];
-    ElMenu: typeof import("element-plus/es")["ElMenu"];
-    ElMenuItem: typeof import("element-plus/es")["ElMenuItem"];
-    ElPageHeader: typeof import("element-plus/es")["ElPageHeader"];
-    ElRow: typeof import("element-plus/es")["ElRow"];
-    ElScrollbar: typeof import("element-plus/es")["ElScrollbar"];
-    ElSpace: typeof import("element-plus/es")["ElSpace"];
-    ElSubMenu: typeof import("element-plus/es")["ElSubMenu"];
-    Footer: typeof import("./src/components/Common/Footer.vue")["default"];
-    HelloI18n: typeof import("./src/components/HelloI18n.vue")["default"];
-    HelloWorld: typeof import("./src/components/HelloWorld.vue")["default"];
-    InfiniteScroll: typeof import("element-plus/es")["ElInfiniteScroll"];
-    LatestPages: typeof import("./src/components/Page/LatestPages.vue")["default"];
-    LocaleChanger: typeof import("./src/components/LocaleChanger.vue")["default"];
-    PageBrief: typeof import("./src/components/Page/PageBrief.vue")["default"];
-    PageToc: typeof import("./src/components/Page/PageToc.vue")["default"];
-    UserPanel: typeof import("./src/components/AppBar/UserPanel/UserPanel.vue")["default"];
+    AppBar: typeof import('./src/components/AppBar/AppBar.vue')['default']
+    ElAffix: typeof import('element-plus/es')['ElAffix']
+    ElAside: typeof import('element-plus/es')['ElAside']
+    ElCol: typeof import('element-plus/es')['ElCol']
+    ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElImage: typeof import('element-plus/es')['ElImage']
+    ElLink: typeof import('element-plus/es')['ElLink']
+    ElMain: typeof import('element-plus/es')['ElMain']
+    ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElPageHeader: typeof import('element-plus/es')['ElPageHeader']
+    ElRow: typeof import('element-plus/es')['ElRow']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElSpace: typeof import('element-plus/es')['ElSpace']
+    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    Footer: typeof import('./src/components/Common/Footer.vue')['default']
+    HelloI18n: typeof import('./src/components/HelloI18n.vue')['default']
+    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    InfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
+    LocaleChanger: typeof import('./src/components/LocaleChanger.vue')['default']
+    PageBrief: typeof import('./src/components/Page/PageBrief.vue')['default']
+    PageToc: typeof import('./src/components/Page/PageToc.vue')['default']
+    UserPanel: typeof import('./src/components/AppBar/UserPanel/UserPanel.vue')['default']
   }
 }
 
-export {};
+export { }

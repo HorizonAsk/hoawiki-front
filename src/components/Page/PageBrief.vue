@@ -1,30 +1,40 @@
 <template>
   <el-space id="pageItem" alignment="left" direction="vertical">
-    <el-link :href="`/pages/${conceptPage.pageId}`" :underline="false">
-      <h2>{{ conceptPage.pageTitle.toString() }}</h2>
-    </el-link>
+    <div>
+      <el-link
+        :href="`/pages/${conceptPage.pageId}`"
+        :underline="false"
+        style="justify-content: flex-start"
+      >
+        <h3 id="pageTitle">{{ conceptPage.pageTitle.toString() }}</h3>
+      </el-link>
+    </div>
     <p v-if="conceptPage.content != null">
       {{ conceptPage.content.toString() }}
     </p>
-    <p
+    <div
       v-else
       style="font-style: italic; color: var(--el-text-color-disabled-base)"
     >
-      （无内容）
-    </p>
-    <el-space>
-      <p>
-        <time class="page_time"
-          >{{ this.formatDate(conceptPage.updateTime.toString()) }}
-        </time>
-      </p>
-      <el-link
-        :href="`/pages/${conceptPage.pageId}/edit`"
-        :underline="false"
-        type="primary"
-        >编辑
-      </el-link>
-    </el-space>
+      （暂无内容）
+    </div>
+    <el-row :gutter="2" style="align-items: center">
+      <el-col span="6">
+        <div>
+          <time class="page_time"
+            >{{ this.formatDate(conceptPage.updateTime.toString()) }}
+          </time>
+        </div>
+      </el-col>
+      <el-col span="6">
+        <el-link
+          :href="`/pages/${conceptPage.pageId}/edit`"
+          :underline="false"
+          type="primary"
+          >编辑
+        </el-link>
+      </el-col>
+    </el-row>
   </el-space>
 </template>
 
@@ -48,9 +58,12 @@ export default defineComponent({
 <style scoped>
 #pageItem {
   text-align: left;
+  padding-left: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-h2 {
-  text-indent: 0;
+#pageTitle {
+  border-bottom: 1px solid #ccc;
 }
 </style>
