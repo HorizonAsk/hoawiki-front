@@ -43,7 +43,7 @@ class UserService {
       localStorage.setItem("roles", roles.toString());
       localStorage.setItem("permissions", permissions.toString());
     } catch (e) {
-      Message.error("Something Wrong when get user information+", e);
+      Message.error("Something Wrong when get user information " + e);
     }
   };
 }

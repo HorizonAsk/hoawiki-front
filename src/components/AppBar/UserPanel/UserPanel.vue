@@ -39,19 +39,20 @@
   </el-sub-menu>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
-import store from "@/store";
+
 import {
-  User,
-  UserFilled,
+  Avatar,
   Plus,
   SwitchButton,
-  Avatar,
+  User,
+  UserFilled,
 } from "@element-plus/icons-vue";
 import { setUserLogout } from "@/services/api/auth";
 
-export default {
+export default defineComponent({
   name: "UserPanel",
   components: {
     User,
@@ -100,7 +101,8 @@ export default {
     },
     LogOut() {
       setUserLogout();
+      this.$router.go(0);
     },
   },
-};
+});
 </script>

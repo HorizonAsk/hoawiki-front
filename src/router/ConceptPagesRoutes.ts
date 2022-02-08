@@ -1,3 +1,5 @@
+import { Component } from "vue";
+
 export default [
   // {
   //   path: "/pages/",
@@ -8,9 +10,20 @@ export default [
   // },
   {
     path: "/pages/:id",
-    component: () => import("@/views/ConceptPage.vue"),
+    component: (): Promise<Component> => {
+      return import("@/views/ConceptPage.vue");
+    },
     meta: {
       title: "page",
+    },
+  },
+  {
+    path: "/pages/:id/edit",
+    component: (): Promise<Component> => {
+      return import("@/views/PageEditor.vue");
+    },
+    meta: {
+      title: "edit page",
     },
   },
 ];

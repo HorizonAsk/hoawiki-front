@@ -38,7 +38,7 @@ export function setUserLogout(): void {
 
 export function setUserRegister(userRegisterInfo: UserRegisterInfo): void {
   AuthService.register(userRegisterInfo)
-    .then((res: AxiosResponse) => {
+    .then(() => {
       Message.info(t("auth.register.register_succeed"));
       router.push("/login");
     })

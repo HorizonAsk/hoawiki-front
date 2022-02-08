@@ -16,16 +16,16 @@ export const userStore = {
     },
   }),
   mutations: {
-    setJWT(state: State, jwt: string) {
+    setJWT(state: State, jwt: string): void {
       state.accessToken = jwt;
       localStorage.setItem("accessToken", jwt);
     },
-    setLoggedUser(state: State, payload: State) {
+    setLoggedUser(state: State, payload: State): void {
       state.accessToken = payload.accessToken;
       state.userinfo.username = payload.userinfo.username;
       state.userinfo.userEmail = payload.userinfo.userEmail;
     },
-    setUserLogout(state: State) {
+    setUserLogout(state: State): void {
       state.accessToken = "";
       state.userinfo.username = "";
       state.userinfo.userEmail = "";

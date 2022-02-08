@@ -5,27 +5,30 @@
     class="infinite-list"
     style="overflow: auto"
   >
-    <el-card
+    <el-space
       v-for="conceptPage in pageItems"
       :key="conceptPage"
-      class="infinite-list-item"
+      :underline="false"
+      alignment="left"
+      class="box-card"
+      direction="vertical"
+      style="width: 100%"
     >
-      <template #header>
-        <router-link :to="`/pages/${conceptPage.pageId}`"
-          >{{ conceptPage.pageTitle.toString() }}
-        </router-link>
-      </template>
-      <time class="page_time">{{ conceptPage.updateTime.toString() }}</time>
-    </el-card>
+      <PageBrief :conceptPage="conceptPage"></PageBrief>
+    </el-space>
   </ul>
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { PageService } from "@/services/page.service.ts";
+import PageBrief from "@/components/Page/PageBrief.vue";
 
-export default {
+export default defineComponent({
   name: "LatestPages",
+  components: {
+    PageBrief,
+  },
   data: function () {
     const currentItemsNumber = ref(0);
     const load = () => {
@@ -53,7 +56,7 @@ export default {
       this.currentPage += 1;
     },
   },
-};
+});
 </script>
 
 <style>

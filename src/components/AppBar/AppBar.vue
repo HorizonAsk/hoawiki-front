@@ -29,12 +29,13 @@
   </el-space>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import LocaleChanger from "@/components/LocaleChanger.vue";
 import UserPanel from "@/components/AppBar/UserPanel/UserPanel.vue";
 import hoalogo from "@/assets/hoalogo.jpg";
 
-export default {
+export default defineComponent({
   name: "AppBar",
   components: {
     UserPanel,
@@ -45,7 +46,7 @@ export default {
       hoalogo,
     };
   },
-};
+});
 </script>
 
 <style scoped></style>

@@ -11,14 +11,14 @@ export interface NewContent {
 
 export class PageService {
   static getPage(pageId: bigint): Promise<AxiosResponse> {
-    return axios.get("page/id/" + pageId.toString()).then((response) => {
+    return axios.get("pages/" + pageId.toString()).then((response) => {
       return response;
     });
   }
 
   static postPage(newPage: NewPage): Promise<AxiosResponse> {
     return axios
-      .post("page/new", { pageTitle: newPage.pageTitle })
+      .post("pages/", { pageTitle: newPage.pageTitle })
       .then((response) => {
         return response;
       });
@@ -26,18 +26,18 @@ export class PageService {
 
   static getPageContent(pageId: bigint): Promise<AxiosResponse> {
     return axios
-      .get("page/id/" + pageId.toString() + "/content")
+      .get("pages/" + pageId.toString() + "/contents/latest")
       .then((response) => {
         return response;
       });
   }
 
   static postPageContent(
-    pageId: bigint,
+    pageId: number | string,
     newContent: NewContent
   ): Promise<AxiosResponse> {
     return axios
-      .post("page/id/" + pageId.toString() + "/content", {
+      .post("pages/" + pageId.toString() + "/contents", {
         contentText: newContent.contentText,
       })
       .then((response) => {
@@ -47,7 +47,7 @@ export class PageService {
 
   static getLatestPages(currentPage: number): Promise<AxiosResponse> {
     return axios
-      .get("page/pages", {
+      .get("pages", {
         params: {
           currentPage: currentPage,
         },

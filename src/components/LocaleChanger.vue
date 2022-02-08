@@ -27,11 +27,12 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import messages from "@intlify/vite-plugin-vue-i18n/messages";
 import { Select } from "@element-plus/icons-vue";
 
-export default {
+export default defineComponent({
   name: "LocaleChanger",
   components: {
     Select,
@@ -47,8 +48,10 @@ export default {
     messages: messages,
   }),
   created() {
-    if (localStorage.getItem("locale")) {
+    if (localStorage.getItem("locale") !== null) {
       this.changeLang(localStorage.getItem("locale"));
+    } else {
+      localStorage.setItem("locale", import.meta.env.VITE_APP_I18N_LOCALE);
     }
   },
   methods: {
@@ -57,5 +60,5 @@ export default {
       localStorage.setItem("locale", index);
     },
   },
-};
+});
 </script>

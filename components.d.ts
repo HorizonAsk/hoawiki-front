@@ -7,22 +7,18 @@ declare module "vue" {
     AppBar: typeof import("./src/components/AppBar/AppBar.vue")["default"];
     ElAffix: typeof import("element-plus/es")["ElAffix"];
     ElAside: typeof import("element-plus/es")["ElAside"];
-    ElButton: typeof import("element-plus/es")["ElButton"];
-    ElCard: typeof import("element-plus/es")["ElCard"];
-    ElCheckbox: typeof import("element-plus/es")["ElCheckbox"];
     ElCol: typeof import("element-plus/es")["ElCol"];
     ElContainer: typeof import("element-plus/es")["ElContainer"];
     ElDivider: typeof import("element-plus/es")["ElDivider"];
-    ElForm: typeof import("element-plus/es")["ElForm"];
-    ElFormItem: typeof import("element-plus/es")["ElFormItem"];
     ElIcon: typeof import("element-plus/es")["ElIcon"];
     ElImage: typeof import("element-plus/es")["ElImage"];
-    ElInput: typeof import("element-plus/es")["ElInput"];
+    ElLink: typeof import("element-plus/es")["ElLink"];
     ElMain: typeof import("element-plus/es")["ElMain"];
     ElMenu: typeof import("element-plus/es")["ElMenu"];
     ElMenuItem: typeof import("element-plus/es")["ElMenuItem"];
     ElPageHeader: typeof import("element-plus/es")["ElPageHeader"];
     ElRow: typeof import("element-plus/es")["ElRow"];
+    ElScrollbar: typeof import("element-plus/es")["ElScrollbar"];
     ElSpace: typeof import("element-plus/es")["ElSpace"];
     ElSubMenu: typeof import("element-plus/es")["ElSubMenu"];
     Footer: typeof import("./src/components/Common/Footer.vue")["default"];
@@ -31,6 +27,7 @@ declare module "vue" {
     InfiniteScroll: typeof import("element-plus/es")["ElInfiniteScroll"];
     LatestPages: typeof import("./src/components/Page/LatestPages.vue")["default"];
     LocaleChanger: typeof import("./src/components/LocaleChanger.vue")["default"];
+    PageBrief: typeof import("./src/components/Page/PageBrief.vue")["default"];
     PageToc: typeof import("./src/components/Page/PageToc.vue")["default"];
     UserPanel: typeof import("./src/components/AppBar/UserPanel/UserPanel.vue")["default"];
   }

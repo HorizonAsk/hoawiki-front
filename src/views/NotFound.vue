@@ -5,10 +5,11 @@
   <meta content="5; URL=/" http-equiv="refresh" />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 
-export default {
+export default defineComponent({
   name: "NotFound",
   setup() {
     const { t } = useI18n({
@@ -24,12 +25,12 @@ export default {
     };
   },
   methods: {
-    leftTime() {
+    leftTime(): void {
       this.jumpTime--;
     },
   },
   created() {
     setInterval(this.leftTime, 1000);
   },
-};
+});
 </script>

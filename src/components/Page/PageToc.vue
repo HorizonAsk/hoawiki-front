@@ -1,32 +1,43 @@
 <template>
   <div style="max-width: 240px">
     <div v-for="anchor in titles" v-bind:key="anchor">
-      <el-divider v-if="anchor.indent < 1"></el-divider>
-      <el-divider v-else border-style="dashed"></el-divider>
-      <span
-        :style="{ padding: `10px 0 10px ${anchor.indent * 20}px` }"
-        @click="handleAnchorClick(anchor)"
-      >
-        <a style="cursor: pointer">{{ anchor.title }}</a>
-      </span>
+      <div v-if="anchor.indent < 1">
+        <el-divider style="margin: 2px"></el-divider>
+        <el-link
+          :style="{ padding: `10px 0 10px ${anchor.indent * 20}px` }"
+          :underline="false"
+          style="font-weight: bolder"
+          @click="handleAnchorClick(anchor)"
+        >
+          <a style="cursor: pointer">{{ anchor.title }}</a>
+        </el-link>
+      </div>
+      <div v-else>
+        <el-divider border-style="dashed" style="margin: 1px"></el-divider>
+        <el-link
+          :style="{ padding: `10px 0 10px ${anchor.indent * 20}px` }"
+          :underline="false"
+          @click="handleAnchorClick(anchor)"
+        >
+          <a style="cursor: pointer">{{ anchor.title }}</a>
+        </el-link>
+      </div>
     </div>
   </div>
-  <v-md-preview ref="preview" :text="content" style="width: 100%" />
 </template>
 
-<script>
-export default {
-  props: ["content"],
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   data: () => ({
     titles: [],
   }),
-  updated() {
-    this.generateToc();
+  emits: {
+    jump: null,
   },
   methods: {
-    generateToc() {
-      const anchors =
-        this.$refs.preview.$el.querySelectorAll("h1,h2,h3,h4,h5,h6");
+    generateToc(anchors: NodeList): void {
       const titles = Array.from(anchors).filter(
         (title) => !!title.innerText.trim()
       );
@@ -34,7 +45,6 @@ export default {
         this.titles = [];
         return;
       }
-
       const hTags = Array.from(
         new Set(titles.map((title) => title.tagName))
       ).sort();
@@ -45,27 +55,15 @@ export default {
         indent: hTags.indexOf(el.tagName),
       }));
     },
-    handleAnchorClick(anchor) {
-      const { preview } = this.$refs;
-      const { lineIndex } = anchor;
-
-      const heading = preview.$el.querySelector(
-        `[data-v-md-line="${lineIndex}"]`
-      );
-
-      if (heading) {
-        preview.scrollToTarget({
-          target: heading,
-          scrollContainer: window,
-          top: 60,
-        });
-      }
+    handleAnchorClick(anchor: Node): void {
+      this.$emit("jump", anchor);
     },
   },
-};
+});
 </script>
 <style scoped>
 .el-menu-item .a {
   display: block;
+  font-family: sans-serif;
 }
 </style>

@@ -1,5 +1,11 @@
 <template>
-  <latest-pages></latest-pages>
+  <el-aside class="side-bar el-aside">
+    <HelloI18n></HelloI18n>
+    <Footer></Footer>
+  </el-aside>
+  <el-main class="body">
+    <latest-pages></latest-pages>
+  </el-main>
 </template>
 
 <script lang="ts">
