@@ -1,8 +1,12 @@
 <template>
-  <h1>404 Not Found!</h1>
-  <h1>{{ t("exception.page_not_found_message") }}</h1>
-  <h3>{{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}</h3>
-  <meta content="5; URL=/" http-equiv="refresh" />
+  <el-space direction="vertical" style="width: 100%; min-height: 100%">
+    <el-card style="text-align: center">
+      <h1>404 Not Found!</h1>
+      <h1>{{ t("exception.page_not_found_message") }}</h1>
+      <h3>{{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}</h3>
+      <meta content="2; URL=/" http-equiv="refresh" />
+    </el-card>
+  </el-space>
 </template>
 
 <script lang="ts">
@@ -21,12 +25,12 @@ export default defineComponent({
   },
   data() {
     return {
-      jumpTime: 5,
+      jumpTime: 2,
     };
   },
   methods: {
     leftTime(): void {
-      this.jumpTime--;
+      this.jumpTime > 0 ? this.jumpTime-- : null;
     },
   },
   created() {

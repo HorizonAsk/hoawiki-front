@@ -11,7 +11,7 @@
   "auth": {
     "login": {
       "login_button_name": "Sign in",
-      "logged_message": "<h1>You have been logged.</h1> <h3>Returning to homepage.</h3>",
+      "logged_message": "<h1>You have been logged.</h1>",
       "register_button_name": "Sign up",
       "login_failed": "Login Failed. Please check your email and password.",
       "email": "Email",
@@ -25,7 +25,7 @@
       "logout_button_name": "Sign out"
     },
     "register": {
-      "register_succeed": "Register Success. Redirect to sign in page.",
+      "register_succeed": "Register Success. Please use your email and password to login",
       "register_failed": "Register Failed. Please check your input.",
       "user_exists": "User exists. Please login or try another email.",
       "restrictions": "Please use letters, numbers for your nickname. DON'T use emojis. <br> And password should including 8 - 40 letters."

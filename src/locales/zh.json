@@ -10,7 +10,7 @@
   "auth": {
     "login": {
       "login_button_name": "登录",
-      "logged_message": "<h1>您已登录</h1> <h3>页面将跳转至首页。</h3>",
+      "logged_message": "<h1>您已登录</h1>",
       "register_button_name": "注册",
       "login_failed": "登陆失败，请检查您的用户名和密码。",
       "email": "邮箱",
@@ -24,7 +24,7 @@
       "logout_button_name": "退出"
     },
     "register": {
-      "register_succeed": "注册成功，转入登陆页面",
+      "register_succeed": "注册成功，请使用您的邮箱和密码登录",
       "register_failed": "注册失败，请检查您的输入内容",
       "user_exists": "用户已存在，请登录或重试其他邮箱",
       "restrictions": "请使用汉字、字母、数字作为您的昵称，不要使用emoji；<br>密码应为8-40位字母、数字等的组合。"

@@ -6,7 +6,8 @@
       style="text-align: center"
     >
       <div v-html="t('auth.login.logged_message')"></div>
-      <meta content="5; URL=/" http-equiv="refresh" />
+      <h3>{{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}</h3>
+      <meta content="2; URL=/" http-equiv="refresh" />
     </div>
     <div v-else class="text-center" style="text-align: center">
       <el-space>
@@ -127,6 +128,7 @@ export default defineComponent({
       password: "",
       checkbox: false,
     },
+    jumpTime: 3,
   }),
 
   methods: {
@@ -153,6 +155,12 @@ export default defineComponent({
       if (!formIs) return;
       formIs.resetFields();
     },
+    leftTime(): void {
+      this.jumpTime > 0 ? this.jumpTime-- : null;
+    },
+  },
+  created() {
+    setInterval(this.leftTime, 1000);
   },
 });
 </script>
