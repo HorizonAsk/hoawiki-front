@@ -1,32 +1,53 @@
 <template>
-  <el-aside class="side-bar">
-    <el-affix :offset="80" fill target="#body" z-index="50">
-      <PageToc id="side-bar-toc" ref="toc" @jump="jumpToHeading"></PageToc>
-    </el-affix>
-  </el-aside>
-  <el-main>
-    <el-space alignment="start" direction="vertical" fill style="width: 100%">
-      <el-space style="align-items: flex-end; justify-content: space-between">
-        <el-space>
-          <el-page-header :content="this.title" @back="goBack"></el-page-header>
-          <el-link
-            :href="`/pages/${this.id}/edit`"
-            :underline="false"
-            type="primary"
-            >编辑
-          </el-link>
-        </el-space>
-        <span style="color: #909399">
-          更新时间：{{ this.formatDate(this.updateTime) }}
-        </span>
-      </el-space>
+  <n-layout
+    ref="containerRef"
+    class="common-layout"
+    has-sider
+    style="width: 100%"
+  >
+    <n-layout-sider bordered content-style="padding: 10px; ">
+      <n-affix
+        :listen-to="containerRef"
+        :top="80"
+        :trigger-top="80"
+        style="width: 100%"
+      >
+        <PageToc id="side-bar-toc" ref="toc" @jump="jumpToHeading"></PageToc>
+      </n-affix>
+    </n-layout-sider>
+    <n-layout-content bordered content-style="padding: 10px; ">
+      <n-space
+        style="
+          align-items: flex-end;
+          justify-content: space-between;
+          width: 100%;
+        "
+      >
+        <n-page-header style="width: 100%" @back="goBack">
+          <template #title>
+            <h1>
+              {{ this.title }}
+            </h1>
+          </template>
+          <template #extra>
+            <a
+              :href="`/pages/${this.id}/edit`"
+              style="text-decoration: none; color: blue"
+              >编辑
+            </a>
+            <span style="color: #909399">
+              更新时间：{{ this.formatDate(this.updateTime) }}
+            </span>
+          </template>
+        </n-page-header>
+      </n-space>
       <v-md-preview ref="preview" :text="content" style="width: 100%" />
-    </el-space>
-  </el-main>
+    </n-layout-content>
+  </n-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { PageService } from "@/services/page.service";
 import PageToc from "@/components/Page/PageToc.vue";
 import { FluentDate } from "@/utils/datetimeFormat";
@@ -40,6 +61,12 @@ export default defineComponent({
     content: "",
     updateTime: "",
   }),
+  setup() {
+    const containerRef = ref<HTMLElement>(null as unknown as HTMLElement);
+    return {
+      containerRef,
+    };
+  },
   mounted() {
     this.id = this.$route.params.id;
     PageService.getPage(this.id).then((res) => {
@@ -68,12 +95,11 @@ export default defineComponent({
       const heading = preview.$el.querySelector(
         `[data-v-md-line="${lineIndex}"]`
       );
-
       if (heading) {
         preview.scrollToTarget({
           target: heading,
           scrollContainer: window,
-          top: 60,
+          top: 80,
         });
       }
     },
@@ -91,8 +117,4 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
-.side-bar {
-  align-items: flex-start;
-}
-</style>
+<style scoped></style>

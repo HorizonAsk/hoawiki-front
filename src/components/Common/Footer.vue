@@ -1,9 +1,9 @@
 <template>
   <div>
     <span>HOAwiki</span>
-    <el-divider border-style="dashed" direction="vertical"></el-divider>
+    <n-divider dashed vertical />
     <span>Horizonask</span>
-    <el-divider border-style="dashed" direction="vertical"></el-divider>
+    <n-divider dashed vertical />
     <span>2021-</span>
   </div>
 </template>

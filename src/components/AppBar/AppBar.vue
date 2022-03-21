@@ -1,31 +1,27 @@
 <template>
-  <el-space
+  <n-space
     direction="horizontal"
     style="
       width: 100%;
-      justify-content: space-between;
+      justify-content: space-around;
       background-color: #ffffff;
     "
   >
-    <el-space>
-      <el-image
+    <n-space>
+      <n-image
+        class="nav-bar-item"
         :src="hoalogo"
-        class="el-menu-item nav-bar-item"
-        fit="cover"
+        preview-disabled
         @click="$router.push('/')"
+        style="padding: 1px"
       />
-      <p style="font-size: var(--el-font-size-extra-large)">HoaWiki</p>
-    </el-space>
-    <el-menu
-      :ellipsis="false"
-      class="el-menu nav-bar-item"
-      mode="horizontal"
-      style="justify-content: flex-end"
-    >
+      <a href="/" style="text-decoration: none"><h3>HoaWiki</h3></a>
+    </n-space>
+    <n-space style="justify-content: flex-end">
       <LocaleChanger class="nav-bar-item"></LocaleChanger>
       <UserPanel class="nav-bar-item"></UserPanel>
-    </el-menu>
-  </el-space>
+    </n-space>
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -33,12 +29,16 @@ import { defineComponent } from "vue";
 import LocaleChanger from "@/components/LocaleChanger.vue";
 import UserPanel from "@/components/AppBar/UserPanel/UserPanel.vue";
 import hoalogo from "@/assets/hoalogo.jpg";
+import { useMessage } from "naive-ui";
 
 export default defineComponent({
   name: "AppBar",
   components: {
     UserPanel,
     LocaleChanger,
+  },
+  setup() {
+    window.$message = useMessage();
   },
   data() {
     return {
@@ -48,6 +48,11 @@ export default defineComponent({
 });
 </script>
 
+<style>
+.n-space > * {
+  align-self: center;
+}
+</style>
 <style scoped>
 .nav-bar-item {
   height: 60px;

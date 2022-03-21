@@ -1,5 +1,5 @@
 <template>
-  <v-space style="width: 100%">
+  <n-space justify="center" style="width: 100%">
     <div
       v-if="$store.getters['user/isLoggedIn']"
       class="text-center"
@@ -10,38 +10,42 @@
       <meta content="2; URL=/" http-equiv="refresh" />
     </div>
     <div v-else class="text-center" style="text-align: center">
-      <el-space>
-        <el-card>
+      <n-space>
+        <n-card>
           <template #header>
             <h1>{{ t("auth.login.login_button_name") }}</h1>
           </template>
 
-          <el-form
+          <n-form
             ref="formRef"
             :model="loginForm"
             :rules="rules"
-            label-width="80px"
-            status-icon
+            :label-width="80"
           >
-            <el-form-item :label="t('auth.login.email')" prop="userEmail">
-              <el-input v-model="loginForm.userEmail"></el-input>
-            </el-form-item>
-            <el-form-item :label="t('auth.login.password')" prop="password">
-              <el-input v-model="loginForm.password" type="password"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="submit($refs.formRef)">
-                {{ t("auth.login.submit") }}
-              </el-button>
-              <el-button @click="clear($refs.formRef)">
-                {{ t("auth.login.clear") }}
-              </el-button>
-            </el-form-item>
-          </el-form>
-        </el-card>
-      </el-space>
+            <n-form-item :label="t('auth.login.email')" path="userEmail">
+              <n-input v-model:value="loginForm.userEmail"></n-input>
+            </n-form-item>
+            <n-form-item :label="t('auth.login.password')" path="password">
+              <n-input
+                v-model:value="loginForm.password"
+                type="password"
+              ></n-input>
+            </n-form-item>
+            <n-form-item style="display: flex; justify-content: center">
+              <n-space>
+                <n-button type="primary" @click="submit($refs.formRef)">
+                  {{ t("auth.login.submit") }}
+                </n-button>
+                <n-button @click="clear()">
+                  {{ t("auth.login.clear") }}
+                </n-button>
+              </n-space>
+            </n-form-item>
+          </n-form>
+        </n-card>
+      </n-space>
     </div>
-  </v-space>
+  </n-space>
 </template>
 <script lang="ts">
 import { setUserLogin } from "@/services/api/auth.ts";
@@ -95,8 +99,8 @@ export default defineComponent({
   methods: {
     submit(formIs): void {
       if (!formIs) return;
-      formIs.validate((isValid) => {
-        if (!isValid) {
+      formIs.validate((notValid) => {
+        if (notValid) {
           Message.error("Check your information!");
         } else {
           console.debug({
@@ -110,9 +114,11 @@ export default defineComponent({
         }
       });
     },
-    clear(formIs): void {
-      if (!formIs) return;
-      formIs.resetFields();
+    clear(): void {
+      this.loginForm = {
+        userEmail: "",
+        password: "",
+      };
     },
     leftTime(): void {
       this.jumpTime > 0 ? this.jumpTime-- : null;

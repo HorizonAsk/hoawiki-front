@@ -34,9 +34,9 @@ apiClient.interceptors.response.use(
       } else {
         Message.error("需要登陆！");
       }
-      // router.push({ path: "/login" });
     } else {
       if (error.response.data.apiCode in ApiResponse) {
+        Message.error(error.response.data.message);
         return Promise.reject(error);
       }
       Message.error(error.response.data.message);

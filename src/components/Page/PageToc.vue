@@ -1,29 +1,29 @@
 <template>
-  <div style="max-width: 240px">
+  <n-anchor listen-to=".n-layout-scroll-container" style="max-width: 240px">
     <div v-for="anchor in titles" v-bind:key="anchor">
       <div v-if="anchor.indent < 1">
-        <el-divider style="margin: 2px"></el-divider>
-        <el-link
+        <n-divider style="margin: 2px"></n-divider>
+        <a
           :style="{ padding: `10px 0 10px ${anchor.indent * 20}px` }"
           :underline="false"
           style="font-weight: bolder"
           @click="handleAnchorClick(anchor)"
         >
           <a style="cursor: pointer">{{ anchor.title }}</a>
-        </el-link>
+        </a>
       </div>
       <div v-else>
-        <el-divider border-style="dashed" style="margin: 1px"></el-divider>
-        <el-link
+        <n-divider style="margin: 1px"></n-divider>
+        <a
           :style="{ padding: `10px 0 10px ${anchor.indent * 20}px` }"
           :underline="false"
           @click="handleAnchorClick(anchor)"
         >
           <a style="cursor: pointer">{{ anchor.title }}</a>
-        </el-link>
+        </a>
       </div>
     </div>
-  </div>
+  </n-anchor>
 </template>
 
 <script lang="ts">

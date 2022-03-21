@@ -75,21 +75,26 @@
 import { defineComponent } from "vue";
 import logo from "@/assets/logo.svg";
 import axios from "@/utils/axios";
-import Message from "@/components/Message/index";
 
 export default defineComponent({
   name: "HelloWorld",
+  setup() {
+    const MessageComp = window.$message;
+    return {
+      MessageComp,
+    };
+  },
   mounted: function () {
     axios
       .get("/message")
       .then((res) => {
         console.log("Message got res as ", res);
-        Message.info("Message got res as " + res.data.message);
+        this.MessageComp.info("Message got res as " + res.data.message);
         console.log();
         this.message = res.data.msg;
       })
       .catch(() => {
-        Message.error("访问/message失败");
+        this.MessageComp.error("访问/message失败");
       });
   },
   data() {

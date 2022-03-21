@@ -1,13 +1,9 @@
 <template>
-  <el-row class="text-center">
-    <el-col cols="12">
-      <p>{{ t("SIDE_BAR_MESSAGE") }}</p>
-    </el-col>
-    <el-col cols="12">
-      <p>{{ t("SIDE_BAR_NOT_LOADED_MESSAGE") }}</p>
-    </el-col>
-    <el-col cols="12"></el-col>
-  </el-row>
+  <n-space vertical>
+    <p>{{ t("SIDE_BAR_MESSAGE") }}</p>
+
+    <p>{{ t("SIDE_BAR_NOT_LOADED_MESSAGE") }}</p>
+  </n-space>
 </template>
 
 <script lang="ts">

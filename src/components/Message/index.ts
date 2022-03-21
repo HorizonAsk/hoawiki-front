@@ -1,32 +1,22 @@
-import { ElMessage } from "element-plus";
-
 export default {
   // success
   success(message: string): void {
-    ElMessage({
-      message,
-      type: "success"
-    });
+    window.$message.success(message);
   },
   // error
   error(message: string): void {
-    ElMessage({
-      message,
-      type: "error"
-    });
+    window.$message.error(message);
   },
   // info
   info(message: string): void {
-    ElMessage({
-      message,
-      type: "info"
-    });
+    window.$message.info(message);
   },
   // warning
   warning(message: string): void {
-    ElMessage({
-      message,
-      type: "warning"
-    });
-  }
+    window.$message.warning(message);
+  },
+  //loading
+  loading(message: string): void {
+    window.$message.loading(message);
+  },
 };

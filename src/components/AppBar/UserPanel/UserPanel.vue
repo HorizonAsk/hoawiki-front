@@ -1,98 +1,103 @@
 <template>
-  <el-sub-menu class="el-sub-menu__title el-sub-menu__hide-arrow" index="3">
-    <template #title>
-      <div v-if="$store.getters['user/isLoggedIn']">
-        <el-icon>
-          <user />
-        </el-icon>
-      </div>
-      <div v-else>
-        <el-icon>
-          <user-filled />
-        </el-icon>
-      </div>
-    </template>
-    <div v-if="$store.getters['user/isLoggedIn']">
-      <el-menu-item
-        v-for="item in items.Logged"
-        :key="item.title"
-        @click="item.action"
-      >
-        <el-icon>
-          <component v-bind:is="item.icon"></component>
-        </el-icon>
-        {{ t(item.title) }}
-      </el-menu-item>
-    </div>
-    <div v-else>
-      <el-menu-item
-        v-for="item in items.NotLogged"
-        :key="item.title"
-        @click="item.action"
-      >
-        <el-icon>
-          <component v-bind:is="item.icon"></component>
-        </el-icon>
-        {{ t(item.title) }}
-      </el-menu-item>
-    </div>
-  </el-sub-menu>
+  <n-dropdown
+    v-if="$store.getters['user/isLoggedIn']"
+    :options="options.Logged"
+    :render-icon="renderDropdownIcon"
+    :render-label="renderDropdownLabel"
+    placement="bottom-start"
+    trigger="click"
+  >
+    <n-button>
+      <n-icon>
+        <UserRegular />
+      </n-icon>
+    </n-button>
+  </n-dropdown>
+  <n-dropdown
+    v-else
+    :options="options.NotLogged"
+    :render-icon="renderDropdownIcon"
+    :render-label="renderDropdownLabel"
+    placement="bottom-start"
+    trigger="click"
+  >
+    <n-button>
+      <n-icon>
+        <UserProfileAlt />
+      </n-icon>
+    </n-button>
+  </n-dropdown>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, h } from "vue";
 import { useI18n } from "vue-i18n";
+import type { DropdownOption } from "naive-ui";
+import { NIcon } from "naive-ui";
+import I18nKey from "@/components/template/I18nKey.vue";
+import { LogIn, LogOut } from "@vicons/ionicons5";
+import { UserPlus, UserRegular } from "@vicons/fa";
+import { UserProfileAlt } from "@vicons/carbon";
 
-import {
-  Avatar,
-  Plus,
-  SwitchButton,
-  User,
-  UserFilled,
-} from "@element-plus/icons-vue";
 import { setUserLogout } from "@/services/api/auth";
 
 export default defineComponent({
   name: "UserPanel",
-  components: {
-    User,
-    UserFilled,
-    Plus,
-    SwitchButton,
-    Avatar,
-  },
   setup: () => {
     const { t } = useI18n({
       useScope: "global",
     });
     return { t };
   },
+  components: {
+    UserRegular,
+    UserProfileAlt,
+  },
   data() {
     return {
-      items: {
+      options: {
+        type: "group",
         Logged: [
           {
             title: "auth.logged.logout_button_name",
-            icon: "SwitchButton",
-            action: this.LogOut,
+            icon: LogOut,
+            props: {
+              onClick: () => {
+                this.LogOut();
+              },
+            },
           },
         ],
         NotLogged: [
           {
             title: "auth.login.login_button_name",
-            icon: "plus",
-            action: this.ToLoginPage,
+            icon: LogIn,
+            props: {
+              onClick: () => {
+                this.ToLoginPage();
+              },
+            },
           },
           {
             title: "auth.login.register_button_name",
-            icon: "Avatar",
-            action: this.ToRegisterPage,
+            icon: UserPlus,
+            props: {
+              onClick: () => {
+                this.ToRegisterPage();
+              },
+            },
           },
         ],
       },
     };
   },
   methods: {
+    renderDropdownLabel(option: DropdownOption) {
+      return h(I18nKey, { inkey: option.title });
+    },
+    renderDropdownIcon(option: DropdownOption) {
+      return h(NIcon, null, h(option.icon));
+    },
     ToLoginPage() {
       this.$router.push("/login");
     },

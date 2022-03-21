@@ -1,20 +1,23 @@
 <template>
-  <el-aside class="side-bar el-aside hidden-xs-only">
-    <HelloI18n></HelloI18n>
-    <Footer></Footer>
-  </el-aside>
-  <el-main class="body">
-    <latest-pages></latest-pages>
-  </el-main>
+  <n-layout has-sider>
+    <n-layout-sider bordered content-style="padding: 24px;">
+      <HelloI18n></HelloI18n>
+      <Footer></Footer>
+    </n-layout-sider>
+    <n-layout-content bordered content-style="padding: 24px; ">
+      <latest-pages></latest-pages>
+    </n-layout-content>
+  </n-layout>
 </template>
 
 <script lang="ts">
-import LatestPages from "@/views/LatestPages.vue";
+import LatestPages from "@/components/Page/LatestPages.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "Home",
   components: { LatestPages },
-};
+});
 </script>
 
 <style scoped></style>

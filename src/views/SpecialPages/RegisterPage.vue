@@ -1,17 +1,19 @@
 <template>
-  <v-space style="width: 100%">
+  <n-space justify="center" style="width: 100%">
     <div
       v-if="$store.getters['user/isLoggedIn']"
       class="text-center"
       style="text-align: center"
     >
       <div v-html="t('auth.login.logged_message')"></div>
-      <h3>{{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}</h3>
+      <h3>
+        {{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}
+      </h3>
       <meta content="2; URL=/" http-equiv="refresh" />
     </div>
     <div v-else class="text-center" style="text-align: center">
-      <el-space>
-        <el-card>
+      <n-space>
+        <n-card>
           <template #header>
             <div class="card-header">
               <h1>{{ t("auth.login.register_button_name") }}</h1>
@@ -19,45 +21,46 @@
             <h5 v-html="t('auth.register.restrictions')"></h5>
           </template>
 
-          <el-form
+          <n-form
             ref="formRef"
             :model="registerForm"
             :rules="rules"
-            label-width="80px"
-            status-icon
+            :label-width="80"
           >
-            <el-form-item :label="t('auth.login.nickname')" prop="userNickName">
-              <el-input v-model="registerForm.userNickName"></el-input>
-            </el-form-item>
-            <el-form-item :label="t('auth.login.email')" prop="userEmail">
-              <el-input v-model="registerForm.userEmail"></el-input>
-            </el-form-item>
-            <el-form-item :label="t('auth.login.password')" prop="password">
-              <el-input
-                v-model="registerForm.password"
+            <n-form-item :label="t('auth.login.nickname')" path="userNickName">
+              <n-input v-model:value="registerForm.userNickName"></n-input>
+            </n-form-item>
+            <n-form-item :label="t('auth.login.email')" path="userEmail">
+              <n-input v-model:value="registerForm.userEmail"></n-input>
+            </n-form-item>
+            <n-form-item :label="t('auth.login.password')" path="password">
+              <n-input
+                v-model:value="registerForm.password"
                 type="password"
-              ></el-input>
-            </el-form-item>
-            <el-form-item prop="checkbox">
-              <el-checkbox
-                v-model="registerForm.checkbox"
+              ></n-input>
+            </n-form-item>
+            <n-form-item path="checkbox">
+              <n-checkbox
+                v-model:checked="registerForm.checkbox"
                 :label="t('auth.login.checked')"
                 size="large"
-              ></el-checkbox>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="submit($refs.formRef)">
-                {{ t("auth.login.submit") }}
-              </el-button>
-              <el-button @click="clear($refs.formRef)">
-                {{ t("auth.login.clear") }}
-              </el-button>
-            </el-form-item>
-          </el-form>
-        </el-card>
-      </el-space>
+              ></n-checkbox>
+            </n-form-item>
+            <n-form-item style="display: flex; justify-content: center">
+              <n-space>
+                <n-button type="primary" @click="submit($refs.formRef)">
+                  {{ t("auth.login.submit") }}
+                </n-button>
+                <n-button @click="clear()">
+                  {{ t("auth.login.clear") }}
+                </n-button>
+              </n-space>
+            </n-form-item>
+          </n-form>
+        </n-card>
+      </n-space>
     </div>
-  </v-space>
+  </n-space>
 </template>
 <script lang="ts">
 import Message from "@/components/Message/index";
@@ -129,13 +132,14 @@ export default defineComponent({
       checkbox: false,
     },
     jumpTime: 3,
+    showTerm: false,
   }),
 
   methods: {
     submit(formIs): void {
       if (!formIs) return;
-      formIs.validate((isValid) => {
-        if (!isValid) {
+      formIs.validate((notValid) => {
+        if (notValid) {
           Message.error(this.t("validation.wrong_validation_common"));
         } else {
           console.debug({
@@ -151,9 +155,13 @@ export default defineComponent({
         }
       });
     },
-    clear(formIs): void {
-      if (!formIs) return;
-      formIs.resetFields();
+    clear(): void {
+      this.registerForm = {
+        userNickName: "",
+        userEmail: "",
+        password: "",
+        checkbox: false,
+      };
     },
     leftTime(): void {
       this.jumpTime > 0 ? this.jumpTime-- : null;
