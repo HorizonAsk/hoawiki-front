@@ -7,7 +7,8 @@
     "build": "vite build",
     "lint": "vue-cli-service lint",
     "dev": "vite",
-    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
+    "release": "standard-version"
   },
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.13",
@@ -54,6 +55,7 @@
     "prettier": "^2.2.1",
     "sass": "^1.38.0",
     "sass-loader": "^10.0.0",
+    "standard-version": "^9.3.2",
     "typescript": "~4.1.5",
     "unplugin-auto-import": "^0.5.11",
     "unplugin-vue-components": "^0.17.15",
