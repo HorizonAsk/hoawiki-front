@@ -1,28 +1,34 @@
-import LoginPage from "@/components/MainPages/SpecialPages/LoginPage.vue";
-import RegisterPage from "@/components/MainPages/SpecialPages/RegisterPage.vue";
-import NotFound from "@/components/MainPages/NotFound.vue";
+import i18n from "@/i18n.ts";
+import { Component } from "vue";
 
+const { t } = i18n.global;
 export default [
   {
     path: "/login",
-    component: LoginPage,
+    component: (): Promise<Component> => {
+      return import("@/views/SpecialPages/LoginPage.vue");
+    },
     meta: {
-      title: "LoginPage",
+      title: t("auth.login.login_button_name"),
     },
   },
   {
     path: "/register",
-    component: RegisterPage,
+    component: (): Promise<Component> => {
+      return import("@/views/SpecialPages/RegisterPage.vue");
+    },
     meta: {
-      title: "Register",
+      title: t("auth.login.register_button_name"),
     },
   },
   {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
-    component: NotFound,
+    component: (): Promise<Component> => {
+      return import("@/views/NotFound.vue");
+    },
     meta: {
-      title: "Register",
+      title: t("exception.page_not_found_title"),
     },
   },
 ];

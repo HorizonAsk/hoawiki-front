@@ -1,15 +1,3 @@
-import {
-  AuthService,
-  UserLoginPostData,
-  UserRegisterInfo,
-} from "@/services/auth.service";
-import { AxiosResponse } from "axios";
-import Message from "@/components/Message/index";
-
-import i18n from "@/i18n.ts";
-
-const { t } = i18n.global;
-
 export interface State {
   accessToken: string;
   userinfo: {
@@ -28,32 +16,20 @@ export const userStore = {
     },
   }),
   mutations: {
-    setUserLogin(state: State, userLoginPostData: UserLoginPostData): void {
-      AuthService.userLogin(userLoginPostData)
-        .then((res: AxiosResponse) => {
-          console.log(res.data.data);
-          state.accessToken = res.data.data;
-          localStorage.setItem("accessToken", res.data.data);
-        })
-        .catch(() => {
-          Message.error(t("auth.login.login_failed"));
-        });
+    setJWT(state: State, jwt: string): void {
+      state.accessToken = jwt;
+      localStorage.setItem("accessToken", jwt);
+    },
+    setLoggedUser(state: State, payload: State): void {
+      state.accessToken = payload.accessToken;
+      state.userinfo.username = payload.userinfo.username;
+      state.userinfo.userEmail = payload.userinfo.userEmail;
     },
     setUserLogout(state: State): void {
-      AuthService.logout();
       state.accessToken = "";
       state.userinfo.username = "";
       state.userinfo.userEmail = "";
       localStorage.removeItem("accessToken");
-    },
-    setUserRegister(state: State, userRegisterInfo: UserRegisterInfo): void {
-      AuthService.register(userRegisterInfo)
-        .then((res: AxiosResponse) => {
-          console.log(res.data);
-        })
-        .catch(() => {
-          Message.error(t("auth.register.register_failed"));
-        });
     },
   },
   actions: {},

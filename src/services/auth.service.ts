@@ -12,8 +12,25 @@ export interface UserRegisterInfo {
   userName: string;
 }
 
+export interface UserLoginResponse {
+  apiCode: number;
+  jwt: string;
+  message: string;
+}
+
+export interface UserRegisterResponse {
+  apiCode: number;
+  message: string;
+  available: boolean;
+  userId: number;
+  email: string;
+  username: string;
+}
+
 export class AuthService {
-  static userLogin(user: UserLoginPostData): Promise<AxiosResponse> {
+  static userLogin(
+    user: UserLoginPostData
+  ): Promise<AxiosResponse<UserLoginResponse>> {
     return axios
       .post("auth/user/login", {
         userEmail: user.userEmail,
@@ -24,14 +41,16 @@ export class AuthService {
       });
   }
 
-  static logout() {
+  static logout(): void {
     // localStorage.removeItem("token");
     // localStorage.removeItem("user");
     // localStorage.removeItem("roles");
     // localStorage.removeItem("permissions");
   }
 
-  static register(userRegisterInfo: UserRegisterInfo) {
+  static register(
+    userRegisterInfo: UserRegisterInfo
+  ): Promise<AxiosResponse<UserRegisterResponse>> {
     return axios
       .post("auth/user/register", {
         userEmail: userRegisterInfo.userEmail,

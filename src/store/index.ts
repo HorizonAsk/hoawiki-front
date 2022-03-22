@@ -1,5 +1,4 @@
 import { createStore, Store } from "vuex";
-import { messageStore } from "@/store/modules/message.ts";
 import { userStore } from "@/store/modules/user.ts";
 
 declare module "@vue/runtime-core" {
@@ -19,7 +18,6 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    message: messageStore,
     user: userStore,
   },
 });

@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/components/MainPages/Home.vue";
 
-import SpecialPagesRoutes from "./specialPagesRoutes";
+import SpecialPagesRoutes from "@/router/specialPagesRoutes";
+import ConceptPagesRoutes from "@/router/ConceptPagesRoutes";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("@/views/Home.vue"),
     meta: {
       title: "Home Page",
     },
@@ -15,6 +15,7 @@ const routes = [
 ];
 
 SpecialPagesRoutes.forEach((route) => routes.push(route));
+ConceptPagesRoutes.forEach((route) => routes.push(route));
 
 const router = createRouter({
   routes,

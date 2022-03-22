@@ -3,6 +3,7 @@ import Message from "@/components/Message";
 // import router from "@/router/index";
 import config from "../../config";
 import store from "@/store";
+import { ApiResponse } from "@/utils/apiResponse";
 
 const apiClient = axios.create({
   timeout: 1000,
@@ -27,14 +28,20 @@ apiClient.interceptors.response.use(
     return res;
   },
   (error) => {
-    if (error.response.data.apiCode == 10401) {
-      Message.error("需要登陆！");
-      // router.push({ path: "/login" });
+    if (error.response.data.apiCode == ApiResponse.API_RESPONSE_UNAUTHORIZED) {
+      if (store.state.user.accessToken) {
+        Message.error("登陆已过期，请重新登陆！");
+      } else {
+        Message.error("需要登陆！");
+      }
     } else {
-      if (error.response.data.message)
-        Message.warning(error.response.data.message);
+      if (error.response.data.apiCode in ApiResponse) {
+        Message.error(error.response.data.message);
+        return Promise.reject(error);
+      }
+      Message.error(error.response.data.message);
     }
-    return Promise.reject();
+    return Promise.reject(error);
   }
 );
 

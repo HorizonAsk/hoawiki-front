@@ -1,69 +1,71 @@
 <template>
-  <v-menu class="mx-auto" offset-y>
-    <template v-slot:activator="{ props }">
-      <v-btn
-        v-model="locale"
-        color="primary"
-        dark
-        min-width="100px"
-        v-bind="props"
-      >
-        {{ t("appbar.change_language") }}
-        <v-icon>mdi-translate</v-icon>
-      </v-btn>
-    </template>
-    <v-card>
-      <v-list class="mx-auto" tile>
-        <v-list-item
-          v-for="(item, index) in messages"
-          :key="index"
-          class="align-center"
-          min-height="30px"
-          min-width="100px"
-          @click="this.changeLang(index)"
-        >
-          <div v-if="index === locale">
-            <v-row>
-              <v-icon>mdi-check</v-icon>
-              <v-list-item-title
-                >{{ t("language." + index) }}
-              </v-list-item-title>
-            </v-row>
-          </div>
-          <div v-else>
-            <v-row>
-              <v-icon>mdi-checkbox-blank-circle-outline</v-icon>
-              <v-list-item-title
-                >{{ t("language." + index) }}
-              </v-list-item-title>
-            </v-row>
-          </div>
-        </v-list-item>
-      </v-list>
-    </v-card>
-  </v-menu>
+  <n-dropdown
+    :options="this.messagesOption"
+    :render-icon="renderDropdownIcon"
+    :render-label="renderDropdownLabel"
+    placement="bottom-start"
+    trigger="click"
+    @select="changeLang"
+  >
+    <n-button style="align-content: center">
+      {{ t("appbar.change_language") }}
+    </n-button>
+  </n-dropdown>
 </template>
 
 <script lang="ts">
+import { defineComponent, h } from "vue";
 import { useI18n } from "vue-i18n";
 import messages from "@intlify/vite-plugin-vue-i18n/messages";
+import { DropdownOption, NIcon } from "naive-ui";
+import I18nKey from "@/components/template/I18nKey.vue";
+import { Select } from "@vicons/tabler";
 
-export default {
+export default defineComponent({
   name: "LocaleChanger",
   setup: () => {
     const { locale, t } = useI18n({
       // inheritLocale: true,
       useScope: "global",
     });
-    return { locale, t };
+    const messagesOption = [];
+    for (const item in messages) {
+      messagesOption.push({
+        label: item,
+        key: item,
+      });
+    }
+    return { locale, t, messagesOption };
   },
-  data: () => ({
-    messages: messages,
-  }),
+  data() {
+    return {
+      messages: messages,
+    };
+  },
+  created() {
+    if (localStorage.getItem("locale") !== null) {
+      this.changeLang(localStorage.getItem("locale"));
+    } else {
+      localStorage.setItem("locale", import.meta.env.VITE_APP_I18N_LOCALE);
+    }
+  },
   methods: {
-    changeLang(index: string) {
-      this.locale = index;
+    changeLang(key: string): void {
+      this.locale = key;
+      localStorage.setItem("locale", key);
+    },
+    renderDropdownLabel(option: DropdownOption) {
+      return h(I18nKey, { inkey: "language." + option.label });
+    },
+    renderDropdownIcon(option: DropdownOption) {
+      if (option.label === this.locale) {
+        return h(NIcon, null, h(Select));
+      } else {
+        return h(NIcon, null);
+      }
     },
   },
-};
+});
 </script>
+
+<style></style>

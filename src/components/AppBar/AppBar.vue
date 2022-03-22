@@ -1,41 +1,60 @@
 <template>
-  <v-layout class=".flex-nowrap align-center" no-gutters="true">
-    <v-col class="d-flex justify-space-around flex-row align-center" xs="0">
-      <v-img :src="hoalogo" class="my-3" contain height="60" />
-      <v-app-bar-title> HoaWiki</v-app-bar-title>
-    </v-col>
-    <v-col>
-      <v-layout></v-layout>
-    </v-col>
-    <v-col class="d-flex justify-end flex-row">
-      <v-card>
-        <LocaleChanger></LocaleChanger>
-      </v-card>
-      <v-card>
-        <UserPanel></UserPanel>
-      </v-card>
-      <v-card class="bg-transparent" elevation="0" min-width="50"></v-card>
-    </v-col>
-  </v-layout>
+  <n-space
+    direction="horizontal"
+    style="
+      width: 100%;
+      justify-content: space-around;
+      background-color: #ffffff;
+    "
+  >
+    <n-space>
+      <n-image
+        class="nav-bar-item"
+        :src="hoalogo"
+        preview-disabled
+        @click="$router.push('/')"
+        style="padding: 1px"
+      />
+      <a href="/" style="text-decoration: none"><h3>HoaWiki</h3></a>
+    </n-space>
+    <n-space style="justify-content: flex-end">
+      <LocaleChanger class="nav-bar-item"></LocaleChanger>
+      <UserPanel class="nav-bar-item"></UserPanel>
+    </n-space>
+  </n-space>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import LocaleChanger from "@/components/LocaleChanger.vue";
 import UserPanel from "@/components/AppBar/UserPanel/UserPanel.vue";
 import hoalogo from "@/assets/hoalogo.jpg";
+import { useMessage } from "naive-ui";
 
-export default {
+export default defineComponent({
   name: "AppBar",
   components: {
     UserPanel,
     LocaleChanger,
+  },
+  setup() {
+    window.$message = useMessage();
   },
   data() {
     return {
       hoalogo,
     };
   },
-};
+});
 </script>
 
-<style scoped></style>
+<style>
+.n-space > * {
+  align-self: center;
+}
+</style>
+<style scoped>
+.nav-bar-item {
+  height: 60px;
+}
+</style>

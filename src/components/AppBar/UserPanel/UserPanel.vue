@@ -1,41 +1,47 @@
 <template>
-  <v-menu>
-    <template v-slot:activator="{ props }">
-      <v-btn v-if="$store.getters['user/isLoggedIn']" v-bind="props">
-        <v-icon> mdi-account-details</v-icon>
-      </v-btn>
-      <v-btn v-else v-bind="props">
-        <v-icon> mdi-account-plus</v-icon>
-      </v-btn>
-    </template>
-    <div>
-      <v-card right top>
-        <v-list v-if="$store.getters['user/isLoggedIn']">
-          <v-list-item v-for="item in items.Logged" :key="item.title">
-            <v-btn @click="item.action">
-              <v-icon>{{ item.icon }}</v-icon>
-              <v-list-item-title>{{ t(item.title) }}</v-list-item-title>
-            </v-btn>
-          </v-list-item>
-        </v-list>
-        <v-list v-else>
-          <v-list-item v-for="item in items.NotLogged" :key="item.title">
-            <v-btn @click="item.action">
-              <v-icon>{{ item.icon }}</v-icon>
-              <v-list-item-title>{{ t(item.title) }}</v-list-item-title>
-            </v-btn>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </div>
-  </v-menu>
+  <n-dropdown
+    v-if="$store.getters['user/isLoggedIn']"
+    :options="options.Logged"
+    :render-icon="renderDropdownIcon"
+    :render-label="renderDropdownLabel"
+    placement="bottom-start"
+    trigger="click"
+  >
+    <n-button>
+      <n-icon>
+        <UserRegular />
+      </n-icon>
+    </n-button>
+  </n-dropdown>
+  <n-dropdown
+    v-else
+    :options="options.NotLogged"
+    :render-icon="renderDropdownIcon"
+    :render-label="renderDropdownLabel"
+    placement="bottom-start"
+    trigger="click"
+  >
+    <n-button>
+      <n-icon>
+        <UserProfileAlt />
+      </n-icon>
+    </n-button>
+  </n-dropdown>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, h } from "vue";
 import { useI18n } from "vue-i18n";
-import store from "@/store";
+import type { DropdownOption } from "naive-ui";
+import { NIcon } from "naive-ui";
+import I18nKey from "@/components/template/I18nKey.vue";
+import { LogIn, LogOut } from "@vicons/ionicons5";
+import { UserPlus, UserRegular } from "@vicons/fa";
+import { UserProfileAlt } from "@vicons/carbon";
 
-export default {
+import { setUserLogout } from "@/services/api/auth";
+
+export default defineComponent({
   name: "UserPanel",
   setup: () => {
     const { t } = useI18n({
@@ -43,32 +49,55 @@ export default {
     });
     return { t };
   },
+  components: {
+    UserRegular,
+    UserProfileAlt,
+  },
   data() {
     return {
-      items: {
+      options: {
+        type: "group",
         Logged: [
           {
             title: "auth.logged.logout_button_name",
-            icon: "mdi-account-off",
-            action: this.LogOut,
+            icon: LogOut,
+            props: {
+              onClick: () => {
+                this.LogOut();
+              },
+            },
           },
         ],
         NotLogged: [
           {
             title: "auth.login.login_button_name",
-            icon: "mdi-account-box",
-            action: this.ToLoginPage,
+            icon: LogIn,
+            props: {
+              onClick: () => {
+                this.ToLoginPage();
+              },
+            },
           },
           {
             title: "auth.login.register_button_name",
-            icon: "mdi-account-edit",
-            action: this.ToRegisterPage,
+            icon: UserPlus,
+            props: {
+              onClick: () => {
+                this.ToRegisterPage();
+              },
+            },
           },
         ],
       },
     };
   },
   methods: {
+    renderDropdownLabel(option: DropdownOption) {
+      return h(I18nKey, { inkey: option.title });
+    },
+    renderDropdownIcon(option: DropdownOption) {
+      return h(NIcon, null, h(option.icon));
+    },
     ToLoginPage() {
       this.$router.push("/login");
     },
@@ -76,8 +105,9 @@ export default {
       this.$router.push("/register");
     },
     LogOut() {
-      store.commit("user/setUserLogout");
+      setUserLogout();
+      this.$router.go(0);
     },
   },
-};
+});
 </script>

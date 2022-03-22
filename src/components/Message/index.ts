@@ -1,40 +1,22 @@
-import store from "@/store";
-
 export default {
   // success
-  success(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "success",
-      message: message,
-      time: time,
-      elevation: elevation,
-    });
+  success(message: string): void {
+    window.$message.success(message);
   },
   // error
-  error(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "error",
-      message: message,
-      time: time,
-      elevation: elevation,
-    });
+  error(message: string): void {
+    window.$message.error(message);
   },
   // info
-  info(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "info",
-      message: message,
-      time: time,
-      elevation: elevation,
-    });
+  info(message: string): void {
+    window.$message.info(message);
   },
   // warning
-  warning(message: string, time = 3000, elevation = 4): void {
-    store.commit("message/setMessage", {
-      type: "warning",
-      message: message,
-      time: time,
-      elevation: elevation,
-    });
+  warning(message: string): void {
+    window.$message.warning(message);
+  },
+  //loading
+  loading(message: string): void {
+    window.$message.loading(message);
   },
 };

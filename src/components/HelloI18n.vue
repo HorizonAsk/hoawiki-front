@@ -1,15 +1,9 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <p>{{ t("SIDE_BAR_MESSAGE") }}</p>
-      </v-col>
-      <v-col cols="12">
-        <p>{{ t("SIDE_BAR_NOT_LOADED_MESSAGE") }}</p>
-      </v-col>
-      <v-col cols="12"> </v-col>
-    </v-row>
-  </v-container>
+  <n-space vertical>
+    <p>{{ t("SIDE_BAR_MESSAGE") }}</p>
+
+    <p>{{ t("SIDE_BAR_NOT_LOADED_MESSAGE") }}</p>
+  </n-space>
 </template>
 
 <script lang="ts">
