@@ -1,41 +1,22 @@
-import store from "@/store";
-import { MessageData } from "@/components/Message/index.d.ts";
-
 export default {
   // success
-  success(data: MessageData): void {
-    store.commit("message", {
-      type: "success",
-      message: data.message ? data.message : data,
-      time: data.time ? data.time : 3000,
-      light: data.light ? data.light : false,
-    });
+  success(message: string): void {
+    window.$message.success(message);
   },
   // error
-  error(data: MessageData): void {
-    store.commit("message", {
-      type: "error",
-      message: data.message ? data.message : data,
-      time: data.time ? data.time : 3000,
-      light: data.light ? data.light : false,
-    });
+  error(message: string): void {
+    window.$message.error(message);
   },
   // info
-  info(data: MessageData): void {
-    store.commit("message", {
-      type: "info",
-      message: data.message ? data.message : data,
-      time: data.time ? data.time : 3000,
-      light: data.light ? data.light : false,
-    });
+  info(message: string): void {
+    window.$message.info(message);
   },
   // warning
-  warning(data: MessageData): void {
-    store.commit("message", {
-      type: "warning",
-      message: data.message ? data.message : data,
-      time: data.time ? data.time : 3000,
-      light: data.light ? data.light : false,
-    });
+  warning(message: string): void {
+    window.$message.warning(message);
+  },
+  //loading
+  loading(message: string): void {
+    window.$message.loading(message);
   },
 };

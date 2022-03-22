@@ -1,16 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
   <meta charset="UTF-8" />
   <link href="./favicon.ico" rel="icon" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Vuetify 3 Vite Preview</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.15.2/katex.min.css" rel="stylesheet" />
+  <title>Hoawiki</title>
+  <style class="text/css">
+      html, body, #app {
+          background-color: #EEEEEEFF;
+          width: 100%;
+          height: 100%;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+      !important;
+      }
+
+      html, body, #app, .el-container {
+          /*设置内部填充为0，几个布局元素之间没有间距*/
+          padding: 0px;
+          /*外部间距也是如此设置*/
+          margin: 0px;
+          /*统一设置高度为100%*/
+      }
+
+      ::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+          background-color: #929292;
+          border-radius: 3px;
+      }
+  </style>
 </head>
 
 <body>
 <div id="app"></div>
 <script src="/src/main.ts" type="module"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.15.2/katex.min.js"></script>
 </body>
 
 </html>

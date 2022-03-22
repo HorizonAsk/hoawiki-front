@@ -1,0 +1,48 @@
+{
+  "SIDE_BAR_MESSAGE": "侧边栏信息",
+  "appbar": {
+    "change_language": "语言"
+  },
+  "language": {
+    "en": "英语",
+    "zh": "中文"
+  },
+  "auth": {
+    "login": {
+      "login_button_name": "登录",
+      "logged_message": "<h1>您已登录</h1>",
+      "register_button_name": "注册",
+      "login_failed": "登陆失败，请检查您的用户名和密码。",
+      "email": "邮箱",
+      "password": "密码",
+      "submit": "提交",
+      "clear": "重置",
+      "nickname": "用户名",
+      "checked": "同意用户协议"
+    },
+    "logged": {
+      "logout_button_name": "退出"
+    },
+    "register": {
+      "register_succeed": "注册成功，请使用您的邮箱和密码登录",
+      "register_failed": "注册失败，请检查您的输入内容",
+      "user_exists": "用户已存在，请登录或重试其他邮箱",
+      "restrictions": "请使用汉字、字母、数字作为您的昵称，不要使用emoji；<br>密码应为8-40位字母、数字等的组合。"
+    }
+  },
+  "validation": {
+    "wrong_validation_common": "请检查输入",
+    "email_must_given": "必须提供邮箱",
+    "email_incorrect": "邮箱格式错误",
+    "password_must_given": "必须输入密码",
+    "password_length_wrong": "密码长度不对",
+    "nickname_must_given": "必须有昵称",
+    "nickname_length_wrong": "昵称长度不对",
+    "checked_must": "必须勾选"
+  },
+  "exception": {
+    "page_not_found_title": "页面未找到",
+    "page_not_found_message": "您访问的页面不存在！",
+    "page_jump_after_time": "页面将于{ jumpTime }秒后跳转至首页。"
+  }
+}

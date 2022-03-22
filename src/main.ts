@@ -1,10 +1,18 @@
 import { createApp } from "vue";
-import App from "./App.vue";
-import store from "./store";
-import vuetify from "./plugins/vuetify";
-import { loadFonts } from "./plugins/webfontloader";
-import Message from "@/components/Message/index";
+import App from "@/App.vue";
+import store from "@/store";
+import "vfonts/Lato.css";
+import i18n from "@/i18n";
+import router from "@/router/index";
+import { vueMarkdownEditor, vueMarkdownPreviewer } from "@/md-editor.js";
 
 // loadFonts();
 
-createApp(App).use(store).use(vuetify).mount("#app");
+const app = createApp(App);
+
+app.use(store);
+app.use(i18n);
+app.use(router);
+app.use(vueMarkdownEditor);
+app.use(vueMarkdownPreviewer);
+app.mount("#app");

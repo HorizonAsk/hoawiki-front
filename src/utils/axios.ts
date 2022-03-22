@@ -1,8 +1,9 @@
 import axios from "axios";
 import Message from "@/components/Message";
 // import router from "@/router/index";
-import { localGet } from "./index";
 import config from "../../config";
+import store from "@/store";
+import { ApiResponse } from "@/utils/apiResponse";
 
 const apiClient = axios.create({
   timeout: 1000,
@@ -15,25 +16,33 @@ apiClient.defaults.baseURL = config[import.meta.env.MODE].baseUrl;
 apiClient.defaults.withCredentials = true;
 // 请求头，headers 信息
 apiClient.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-apiClient.defaults.headers.common["token"] = localGet("token") || "";
+apiClient.defaults.headers.common["Authorization"] =
+  store.state.user.accessToken;
 // 默认 post 请求，使用 application/json 形式
 apiClient.defaults.headers.post["Content-Type"] = "application/json";
 
 // 请求拦截器，内部根据返回值，重新组装，统一管理。
-apiClient.interceptors.response.use((res) => {
-  if (typeof res.data !== "object") {
-    Message.error("服务端异常！");
-    return Promise.reject(res);
-  }
-  if (res.data.resultCode != 200) {
-    if (res.data.message) Message.info(res.data.message);
-    if (res.data.resultCode == 419) {
-      Message.warning("需要登陆！");
-      // router.push({ path: "/login" });
+apiClient.interceptors.response.use(
+  (res) => {
+    console.debug("axios got res as", res);
+    return res;
+  },
+  (error) => {
+    if (error.response.data.apiCode == ApiResponse.API_RESPONSE_UNAUTHORIZED) {
+      if (store.state.user.accessToken) {
+        Message.error("登陆已过期，请重新登陆！");
+      } else {
+        Message.error("需要登陆！");
+      }
+    } else {
+      if (error.response.data.apiCode in ApiResponse) {
+        Message.error(error.response.data.message);
+        return Promise.reject(error);
+      }
+      Message.error(error.response.data.message);
     }
-    return Promise.reject(res.data);
+    return Promise.reject(error);
   }
-  return res.data;
-});
+);
 
 export default apiClient;
