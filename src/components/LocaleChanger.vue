@@ -49,15 +49,19 @@ export default defineComponent({
   },
   created() {
     if (localStorage.getItem("locale") !== null) {
-      this.changeLang(localStorage.getItem("locale"));
+      this.locale = localStorage.getItem("locale");
+      localStorage.setItem("locale", localStorage.getItem("locale"));
     } else {
       localStorage.setItem("locale", import.meta.env.VITE_APP_I18N_LOCALE);
     }
   },
   methods: {
     changeLang(key: string): void {
-      this.locale = key;
-      localStorage.setItem("locale", key);
+      if (this.locale != key) {
+        this.locale = key;
+        localStorage.setItem("locale", key);
+        this.$router.go(0);
+      }
     },
     renderDropdownLabel(option: DropdownOption) {
       return h(I18nKey, { inkey: "language." + option.label });
