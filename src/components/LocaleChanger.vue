@@ -8,6 +8,9 @@
     @select="changeLang"
   >
     <n-button style="align-content: center">
+      <n-icon>
+        <LanguageSharp></LanguageSharp>
+      </n-icon>
       {{ t("appbar.change_language") }}
     </n-button>
   </n-dropdown>
@@ -19,10 +22,12 @@ import { useI18n } from "vue-i18n";
 import messages from "@intlify/vite-plugin-vue-i18n/messages";
 import { DropdownOption, NIcon } from "naive-ui";
 import I18nKey from "@/components/template/I18nKey.vue";
-import { Select } from "@vicons/tabler";
+import { Check } from "@vicons/tabler";
+import { LanguageSharp } from "@vicons/ionicons5";
 
 export default defineComponent({
   name: "LocaleChanger",
+  components: { LanguageSharp },
   setup: () => {
     const { locale, t } = useI18n({
       // inheritLocale: true,
@@ -59,7 +64,7 @@ export default defineComponent({
     },
     renderDropdownIcon(option: DropdownOption) {
       if (option.label === this.locale) {
-        return h(NIcon, null, h(Select));
+        return h(NIcon, null, h(Check));
       } else {
         return h(NIcon, null);
       }
