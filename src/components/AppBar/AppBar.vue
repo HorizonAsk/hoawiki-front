@@ -48,11 +48,6 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.n-space > * {
-  align-self: center;
-}
-</style>
 <style scoped>
 .nav-bar-item {
   height: 60px;

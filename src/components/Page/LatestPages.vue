@@ -1,5 +1,5 @@
 <template>
-  <n-space>
+  <n-space item-style="width: 100%" vertical>
     <h2>最新页面</h2>
     <InfiniteScroll :scroll="getLatestPages">
       <div
@@ -86,8 +86,5 @@ export default defineComponent({
 <style scoped>
 n-space::-webkit-scrollbar {
   display: none;
-}
-
-.latest_pages {
 }
 </style>

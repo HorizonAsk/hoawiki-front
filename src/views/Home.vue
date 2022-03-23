@@ -4,7 +4,7 @@
       <HelloI18n></HelloI18n>
       <Footer></Footer>
     </n-layout-sider>
-    <n-layout-content bordered content-style="padding: 24px; ">
+    <n-layout-content bordered content-style="padding: 24px; height:100%">
       <latest-pages></latest-pages>
     </n-layout-content>
   </n-layout>

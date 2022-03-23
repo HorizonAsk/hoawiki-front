@@ -32,6 +32,10 @@ export default defineComponent({
 </script>
 
 <style>
+.n-space > * {
+  align-self: center;
+}
+
 .n-affix {
   width: 100vw;
   z-index: 999;
