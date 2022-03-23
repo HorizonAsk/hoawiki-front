@@ -1,12 +1,20 @@
 <template>
-  <el-space direction="vertical" style="width: 100%; min-height: 100%">
-    <el-card style="text-align: center">
-      <h1>404 Not Found!</h1>
-      <h1>{{ t("exception.page_not_found_message") }}</h1>
-      <h3>{{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}</h3>
-      <meta content="2; URL=/" http-equiv="refresh" />
-    </el-card>
-  </el-space>
+  <n-layout-content
+    content-style="padding: 24px;width: 100%"
+    style="min-height: 400px; background-color: dimgray"
+  >
+    <n-space style="justify-content: center">
+      <n-card style="text-align: center">
+        <template #header><h1>404 Not Found!</h1></template>
+
+        <h1>{{ t("exception.page_not_found_message") }}</h1>
+        <h3>
+          {{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}
+        </h3>
+        <meta content="4; URL=/" http-equiv="refresh" />
+      </n-card>
+    </n-space>
+  </n-layout-content>
 </template>
 
 <script lang="ts">
@@ -25,7 +33,7 @@ export default defineComponent({
   },
   data() {
     return {
-      jumpTime: 2,
+      jumpTime: 4,
     };
   },
   methods: {
