@@ -15,7 +15,10 @@
         <PageToc id="side-bar-toc" ref="toc" @jump="jumpToHeading"></PageToc>
       </n-affix>
     </n-layout-sider>
-    <n-layout-content bordered content-style="padding: 10px; ">
+    <n-layout-content
+      bordered
+      content-style="padding: 10px; height:100%;min-height:400px"
+    >
       <n-space
         style="
           align-items: flex-end;

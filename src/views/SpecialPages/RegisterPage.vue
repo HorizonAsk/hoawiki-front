@@ -1,66 +1,74 @@
 <template>
-  <n-space justify="center" style="width: 100%">
-    <div
-      v-if="$store.getters['user/isLoggedIn']"
-      class="text-center"
-      style="text-align: center"
-    >
-      <div v-html="t('auth.login.logged_message')"></div>
-      <h3>
-        {{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}
-      </h3>
-      <meta content="2; URL=/" http-equiv="refresh" />
-    </div>
-    <div v-else class="text-center" style="text-align: center">
-      <n-space>
-        <n-card>
-          <template #header>
-            <div class="card-header">
-              <h1>{{ t("auth.login.register_button_name") }}</h1>
-            </div>
-            <h5 v-html="t('auth.register.restrictions')"></h5>
-          </template>
+  <n-layout-content
+    content-style="padding: 24px"
+    style="min-height: 400px; background-color: dimgray"
+  >
+    <n-space style="justify-content: center">
+      <div
+        v-if="$store.getters['user/isLoggedIn']"
+        class="text-center"
+        style="text-align: center"
+      >
+        <div v-html="t('auth.login.logged_message')"></div>
+        <h3>
+          {{ t("exception.page_jump_after_time", { jumpTime: jumpTime }) }}
+        </h3>
+        <meta content="2; URL=/" http-equiv="refresh" />
+      </div>
+      <div v-else class="text-center" style="text-align: center">
+        <n-space>
+          <n-card>
+            <template #header>
+              <div class="card-header">
+                <h1>{{ t("auth.login.register_button_name") }}</h1>
+              </div>
+              <h5 v-html="t('auth.register.restrictions')"></h5>
+            </template>
 
-          <n-form
-            ref="formRef"
-            :model="registerForm"
-            :rules="rules"
-            :label-width="80"
-          >
-            <n-form-item :label="t('auth.login.nickname')" path="userNickName">
-              <n-input v-model:value="registerForm.userNickName"></n-input>
-            </n-form-item>
-            <n-form-item :label="t('auth.login.email')" path="userEmail">
-              <n-input v-model:value="registerForm.userEmail"></n-input>
-            </n-form-item>
-            <n-form-item :label="t('auth.login.password')" path="password">
-              <n-input
-                v-model:value="registerForm.password"
-                type="password"
-              ></n-input>
-            </n-form-item>
-            <n-form-item path="checkbox">
-              <n-checkbox
-                v-model:checked="registerForm.checkbox"
-                :label="t('auth.login.checked')"
-                size="large"
-              ></n-checkbox>
-            </n-form-item>
-            <n-form-item style="display: flex; justify-content: center">
-              <n-space>
-                <n-button type="primary" @click="submit($refs.formRef)">
-                  {{ t("auth.login.submit") }}
-                </n-button>
-                <n-button @click="clear()">
-                  {{ t("auth.login.clear") }}
-                </n-button>
-              </n-space>
-            </n-form-item>
-          </n-form>
-        </n-card>
-      </n-space>
-    </div>
-  </n-space>
+            <n-form
+              ref="formRef"
+              :label-width="80"
+              :model="registerForm"
+              :rules="rules"
+            >
+              <n-form-item
+                :label="t('auth.login.nickname')"
+                path="userNickName"
+              >
+                <n-input v-model:value="registerForm.userNickName"></n-input>
+              </n-form-item>
+              <n-form-item :label="t('auth.login.email')" path="userEmail">
+                <n-input v-model:value="registerForm.userEmail"></n-input>
+              </n-form-item>
+              <n-form-item :label="t('auth.login.password')" path="password">
+                <n-input
+                  v-model:value="registerForm.password"
+                  type="password"
+                ></n-input>
+              </n-form-item>
+              <n-form-item path="checkbox">
+                <n-checkbox
+                  v-model:checked="registerForm.checkbox"
+                  :label="t('auth.login.checked')"
+                  size="large"
+                ></n-checkbox>
+              </n-form-item>
+              <n-form-item style="display: flex; justify-content: center">
+                <n-space>
+                  <n-button type="primary" @click="submit($refs.formRef)">
+                    {{ t("auth.login.submit") }}
+                  </n-button>
+                  <n-button @click="clear()">
+                    {{ t("auth.login.clear") }}
+                  </n-button>
+                </n-space>
+              </n-form-item>
+            </n-form>
+          </n-card>
+        </n-space>
+      </div>
+    </n-space>
+  </n-layout-content>
 </template>
 <script lang="ts">
 import Message from "@/components/Message/index";
