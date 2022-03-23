@@ -3,7 +3,12 @@
     <n-layout ref="containerRef" class="common-layout">
       <n-layout-header bordered content-style="padding: 10px; "
         >>
-        <n-affix :listen-to="containerRef" :top="0" :trigger-top="60">
+        <n-affix
+          :listen-to="containerRef"
+          :top="0"
+          :trigger-top="60"
+          style="box-shadow: 0px 5px 2px dimgray"
+        >
           <AppBar id="nav"></AppBar>
         </n-affix>
         <div style="height: 50px"></div>
