@@ -954,6 +954,11 @@
   resolved "https://registry.npmmirror.com/@css-render/vue3-ssr/-/vue3-ssr-0.15.9.tgz#59ce56a0ee417748845af9e29784235381f9b049"
   integrity sha512-b3wvEIZYjToOEAV/oUqVtcg+MPF/iSZB9VmVF7fMAAAfvVTc2kB4TZDhGZCMkGjGZxOUm1jia7q/Z9FJnJGLKw==
 
+"@dash14/svg-pan-zoom@^3.6.6":
+  version "3.6.6"
+  resolved "https://registry.npmmirror.com/@dash14/svg-pan-zoom/-/svg-pan-zoom-3.6.6.tgz#77f01e999a3280fb6bfa837aec235f7f1a693189"
+  integrity sha512-HXzIuzvlrNzBw9ENlj3cWFHzhZyNmsIrvutUfZA8cT3Og3WP6rC22eUlVIzezfEC9FRRCrFNKMfumSfx8jd3/A==
+
 "@emotion/hash@~0.8.0":
   version "0.8.0"
   resolved "https://registry.npmmirror.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
@@ -4262,7 +4267,7 @@ d3-force@1:
     d3-quadtree "1"
     d3-timer "1"
 
-d3-force@3:
+d3-force@3, d3-force@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmmirror.com/d3-force/-/d3-force-3.0.0.tgz#3e2ba1a61e70888fe3d9194e30d6d14eece155c4"
   integrity sha512-zxV/SsA+U4yte8051P4ECydjD/S+qeYtnaIyAs9tgHCqfguma/aAQDjo85A9Z6EKhBirHRJHXIgJUlffT4wdLg==
@@ -7878,6 +7883,11 @@ mississippi@^3.0.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmmirror.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
+
 mixin-deep@^1.2.0:
   version "1.3.2"
   resolved "https://registry.npmmirror.com/mixin-deep/-/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"
@@ -10881,6 +10891,14 @@ uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.npmmirror.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+v-network-graph@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.npmmirror.com/v-network-graph/-/v-network-graph-0.5.7.tgz#8628ae71e24d91b50c740d074c690bcc5f3ada0d"
+  integrity sha512-EKpDedYbuHBbwsStN9CFihSv4v2J+k85e/6EAhgoWhOacsPXWi3UAXKMGsesqJERFFM1WixeobjeVB5M/18YZw==
+  dependencies:
+    "@dash14/svg-pan-zoom" "^3.6.6"
+    mitt "^3.0.0"
 
 v8-compile-cache@^2.0.3:
   version "2.3.0"

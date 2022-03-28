@@ -53,6 +53,7 @@ export default defineConfig({
       scss: {
         additionalData: `@use "~/styles/element/index.scss" as *;`,
       },
+      css: ["v-network-graph/lib/style.css"],
     },
   },
 });
