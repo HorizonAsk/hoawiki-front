@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](///compare/v0.1.1...v0.1.2) (2022-04-29)
+
+
+### Bug Fixes
+
+* redirection page of NotFound.vue 5f30d2e
+* refresh after UI language changed LocaleChanger.vue 5008e2c
+
 ### [0.1.1](///compare/v0.1.1-alpha.0...v0.1.1) (2022-03-23)
 
 
