@@ -53,7 +53,6 @@ export default defineComponent({
   },
   data: () => ({
     title: "",
-    text: "",
     content: "",
     showModalExit: false,
     showModalSave: false,
@@ -75,9 +74,9 @@ export default defineComponent({
     });
   },
   methods: {
-    save(text: string): void {
+    save(): void {
       PageService.postPageContent(this.id, {
-        contentText: text,
+        contentText: this.content,
       }); // TODO: exceptions.
       message.info("已保存");
       // TODO: wait.
