@@ -12,14 +12,6 @@ All notable changes to this project will be documented in this file. See [standa
 * redirection page of NotFound.vue ([5f038a1](https://github.com/HorizonAsk/hoawiki-front/commit/5f038a1144bc7515bfecd556b37c228ae7c47f57))
 * refresh after UI language changed LocaleChanger.vue ([69eeb6f](https://github.com/HorizonAsk/hoawiki-front/commit/69eeb6f91188bc7f78c7c45b579be0a15a174a71))
 
-### [0.1.2](///compare/v0.1.1...v0.1.2) (2022-04-29)
-
-
-### Bug Fixes
-
-* redirection page of NotFound.vue 5f30d2e
-* refresh after UI language changed LocaleChanger.vue 5008e2c
-
 ### [0.1.1](///compare/v0.1.1-alpha.0...v0.1.1) (2022-03-23)
 
 
