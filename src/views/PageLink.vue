@@ -114,37 +114,11 @@ export default defineComponent({
   },
   mounted() {
     this.id = this.$route.params.id;
-    this.updateFrom(this.id);
-    this.updateTo(this.id);
+    this.updateLink(this.id);
   },
   methods: {
-    updateFrom(id: bigint) {
-      PageLinkService.getPageLinkFrom(id).then((res) => {
-        res.data.items.forEach((pagelinkitem: PageLinkResponse) => {
-          this.pageNodes[pagelinkitem.pageTo.toString()] = {
-            name: pagelinkitem.pageTo.toString(),
-          };
-          this.pageNodes[pagelinkitem.pageFrom.toString()] = {
-            name: pagelinkitem.pageFrom.toString(),
-          };
-          if (this.nodeList.indexOf(pagelinkitem.pageTo) == -1) {
-            this.nodeList.push(pagelinkitem.pageTo);
-          }
-          if (this.nodeList.indexOf(pagelinkitem.pageFrom) == -1) {
-            this.nodeList.push(pagelinkitem.pageFrom);
-          }
-        });
-
-        res.data.items.forEach((pagelinkitem: PageLinkResponse) => {
-          this.pageLinks[pagelinkitem.pageLinkId.toString()] = {
-            source: pagelinkitem.pageFrom.toString(),
-            target: pagelinkitem.pageTo.toString(),
-          };
-        });
-      });
-    },
-    updateTo(id: bigint) {
-      PageLinkService.getPageLinkTo(id).then((res) => {
+    updateLink(id: bigint) {
+      PageLinkService.getPageLinkOf(id, 2).then((res) => {
         res.data.items.forEach((pagelinkitem: PageLinkResponse) => {
           this.pageNodes[pagelinkitem.pageTo.toString()] = {
             name: pagelinkitem.pageTo.toString(),

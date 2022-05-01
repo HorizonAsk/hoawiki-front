@@ -8,6 +8,14 @@ export interface PageLinkResponse {
 }
 
 export class PageLinkService {
+  static getPageLinkOf(pageId: bigint, depth = 2): Promise<AxiosResponse> {
+    return axios
+      .get("pagelinks?pageId=" + pageId.toString() + "&depth=" + depth)
+      .then((response) => {
+        return response;
+      });
+  }
+
   static getPageLinkTo(pageId: bigint): Promise<AxiosResponse> {
     return axios
       .get("pagelinks/to?pageId=" + pageId.toString())

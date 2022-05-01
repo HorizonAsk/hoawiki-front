@@ -2,40 +2,40 @@
 // We suggest you to commit this file into source control
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
-declare module "vue" {
+declare module 'vue' {
   export interface GlobalComponents {
-    AppBar: typeof import("./src/components/AppBar/AppBar.vue")["default"];
-    Footer: typeof import("./src/components/Common/Footer.vue")["default"];
-    HelloI18n: typeof import("./src/components/HelloI18n.vue")["default"];
-    HelloWorld: typeof import("./src/components/HelloWorld.vue")["default"];
-    I18nKey: typeof import("./src/components/template/I18nKey.vue")["default"];
-    InfiniteScroll: typeof import("./src/components/template/InfiniteScroll.vue")["default"];
-    LatestPages: typeof import("./src/components/Page/LatestPages.vue")["default"];
-    LocaleChanger: typeof import("./src/components/LocaleChanger.vue")["default"];
-    NAffix: typeof import("naive-ui")["NAffix"];
-    NAnchor: typeof import("naive-ui")["NAnchor"];
-    NAvatar: typeof import("naive-ui")["NAvatar"];
-    NButton: typeof import("naive-ui")["NButton"];
-    NCard: typeof import("naive-ui")["NCard"];
-    NDivider: typeof import("naive-ui")["NDivider"];
-    NDropdown: typeof import("naive-ui")["NDropdown"];
-    NEmpty: typeof import("naive-ui")["NEmpty"];
-    NIcon: typeof import("naive-ui")["NIcon"];
-    NImage: typeof import("naive-ui")["NImage"];
-    NLayout: typeof import("naive-ui")["NLayout"];
-    NLayoutContent: typeof import("naive-ui")["NLayoutContent"];
-    NLayoutHeader: typeof import("naive-ui")["NLayoutHeader"];
-    NLayoutSider: typeof import("naive-ui")["NLayoutSider"];
-    NMessageProvider: typeof import("naive-ui")["NMessageProvider"];
-    NModal: typeof import("naive-ui")["NModal"];
-    NPageHeader: typeof import("naive-ui")["NPageHeader"];
-    NSpace: typeof import("naive-ui")["NSpace"];
-    NSpin: typeof import("naive-ui")["NSpin"];
-    NThing: typeof import("naive-ui")["NThing"];
-    PageBrief: typeof import("./src/components/Page/PageBrief.vue")["default"];
-    PageToc: typeof import("./src/components/Page/PageToc.vue")["default"];
-    UserPanel: typeof import("./src/components/AppBar/UserPanel/UserPanel.vue")["default"];
+    AppBar: typeof import('./src/components/AppBar/AppBar.vue')['default']
+    Footer: typeof import('./src/components/Common/Footer.vue')['default']
+    HelloI18n: typeof import('./src/components/HelloI18n.vue')['default']
+    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    I18nKey: typeof import('./src/components/template/I18nKey.vue')['default']
+    InfiniteScroll: typeof import('./src/components/template/InfiniteScroll.vue')['default']
+    LatestPages: typeof import('./src/components/Page/LatestPages.vue')['default']
+    LocaleChanger: typeof import('./src/components/LocaleChanger.vue')['default']
+    NAffix: typeof import('naive-ui')['NAffix']
+    NAvatar: typeof import('naive-ui')['NAvatar']
+    NButton: typeof import('naive-ui')['NButton']
+    NCard: typeof import('naive-ui')['NCard']
+    NDivider: typeof import('naive-ui')['NDivider']
+    NDropdown: typeof import('naive-ui')['NDropdown']
+    NEmpty: typeof import('naive-ui')['NEmpty']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NIcon: typeof import('naive-ui')['NIcon']
+    NImage: typeof import('naive-ui')['NImage']
+    NInput: typeof import('naive-ui')['NInput']
+    NLayout: typeof import('naive-ui')['NLayout']
+    NLayoutContent: typeof import('naive-ui')['NLayoutContent']
+    NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
+    NLayoutSider: typeof import('naive-ui')['NLayoutSider']
+    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
+    NSpace: typeof import('naive-ui')['NSpace']
+    NSpin: typeof import('naive-ui')['NSpin']
+    NThing: typeof import('naive-ui')['NThing']
+    PageBrief: typeof import('./src/components/Page/PageBrief.vue')['default']
+    PageToc: typeof import('./src/components/Page/PageToc.vue')['default']
+    UserPanel: typeof import('./src/components/AppBar/UserPanel/UserPanel.vue')['default']
   }
 }
 
-export {};
+export { }
