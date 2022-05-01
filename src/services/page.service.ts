@@ -9,6 +9,13 @@ export interface NewContent {
   contentText: string;
 }
 
+export interface PageBrief {
+  pageTitle: string;
+  updateTime: string;
+  pageId: bigint;
+  content: string;
+}
+
 export class PageService {
   static getPage(pageId: bigint): Promise<AxiosResponse> {
     return axios.get("pages/" + pageId.toString()).then((response) => {
@@ -51,6 +58,16 @@ export class PageService {
         params: {
           currentPage: currentPage,
         },
+      })
+      .then((response) => {
+        return response;
+      });
+  }
+
+  static getPageAbstracts(pageIdList: Array<bigint>): Promise<AxiosResponse> {
+    return axios
+      .post("pages/pageBrief", {
+        pageIds: pageIdList,
       })
       .then((response) => {
         return response;

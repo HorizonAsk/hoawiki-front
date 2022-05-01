@@ -20,13 +20,13 @@
       }"
     >
       <text
-        :font-size="20 * scale"
+        :font-size="15 * scale"
         dominant-baseline="central"
-        fill="#ffffff"
+        fill="#000000"
         text-anchor="middle"
         x="0"
         y="0"
-        >{{ nodeId }}
+        >{{ this.pageAbstracts[nodeId]?.pageTitle }}
       </text>
     </template>
   </v-network-graph>
@@ -36,8 +36,8 @@
     class="tooltip"
   >
     <n-card>
-      <div>HI</div>
-      <div>{{ this.pageNodes[targetNodeId]?.name ?? "" }}</div>
+      <div>{{ this.pageAbstracts[targetNodeId]?.pageTitle }}</div>
+      <div>{{ this.pageAbstracts[targetNodeId]?.content ?? "" }}</div>
     </n-card>
   </div>
 </template>
@@ -46,27 +46,55 @@
 import * as vNG from "v-network-graph";
 import { Layouts } from "v-network-graph";
 import { PageLinkResponse, PageLinkService } from "@/services/pagelink.service";
+import { PageBrief, PageService } from "@/services/page.service";
 import { defineComponent, reactive, ref } from "vue";
-import { ForceLayout } from "v-network-graph/lib/force-layout";
+import {
+  ForceEdgeDatum,
+  ForceLayout,
+  ForceNodeDatum,
+} from "v-network-graph/lib/force-layout";
 
 const configs = reactive(
   vNG.defineConfigs({
+    node: {
+      selectable: true,
+      normal: {
+        type: "rect",
+        width: (node) => node.size,
+        height: 32,
+        borderRadius: 8,
+        color: (node) => node.color,
+      },
+      hover: {
+        color: "#ff5500",
+        width: (node) => node.size,
+        height: 32,
+        borderRadius: 8,
+      },
+      label: {
+        fontSize: 6,
+        color: "#000000",
+        direction: "north",
+      },
+    },
     view: {
       layoutHandler: new ForceLayout({
         positionFixedByDrag: false,
-        positionFixedByClickWithAltKey: false,
+        positionFixedByClickWithAltKey: true,
         // * The following are the default parameters for the simulation.
         // * You can customize it by uncommenting below.
-        // createSimulation: (d3, nodes, edges) => {
-        //   const forceLink = d3.forceLink<ForceNodeDatum, ForceEdgeDatum>(edges).id(d => d.id)
-        //   return d3
-        //     .forceSimulation(nodes)
-        //     .force("edge", forceLink.distance(100))
-        //     .force("charge", d3.forceManyBody())
-        //     .force("collide", d3.forceCollide(50).strength(0.2))
-        //     .force("center", d3.forceCenter().strength(0.05))
-        //     .alphaMin(0.001)
-        // }
+        createSimulation: (d3, nodes, edges) => {
+          const forceLink = d3
+            .forceLink<ForceNodeDatum, ForceEdgeDatum>(edges)
+            .id((d) => d.id);
+          return d3
+            .forceSimulation(nodes)
+            .force("edge", forceLink.distance(200))
+            .force("charge", d3.forceManyBody())
+            .force("collide", d3.forceCollide(50).strength(0.2))
+            .force("center", d3.forceCenter().strength(0.05))
+            .alphaMin(0.001);
+        },
       }),
     },
     edge: {
@@ -103,7 +131,8 @@ export default defineComponent({
       pageLinks: ref({}),
       pageNodesLayouts,
       pageNodeNum: 0,
-      nodeList: ref([]),
+      nodeList: [],
+      pageAbstracts: {},
       graphConfig: configs,
       // for tooltip
       targetNodeId,
@@ -122,9 +151,13 @@ export default defineComponent({
         res.data.items.forEach((pagelinkitem: PageLinkResponse) => {
           this.pageNodes[pagelinkitem.pageTo.toString()] = {
             name: pagelinkitem.pageTo.toString(),
+            size: pagelinkitem.pageTo.toString().length * 75,
+            color: "#ffffff",
           };
           this.pageNodes[pagelinkitem.pageFrom.toString()] = {
             name: pagelinkitem.pageFrom.toString(),
+            size: pagelinkitem.pageTo.toString().length * 75,
+            color: "#ffffff",
           };
           if (this.nodeList.indexOf(pagelinkitem.pageTo) == -1) {
             this.nodeList.push(pagelinkitem.pageTo);
@@ -138,6 +171,20 @@ export default defineComponent({
             source: pagelinkitem.pageFrom.toString(),
             target: pagelinkitem.pageTo.toString(),
           };
+        });
+        // console.log(this.nodeList);
+        this.updatePageAbstracts();
+        this.$nextTick(() => {
+          this.pageNodesLayouts.nodes[this.id].fixed = true;
+          this.pageNodes[this.id].color = "#99ccff";
+        });
+      });
+    },
+    updatePageAbstracts() {
+      PageService.getPageAbstracts(this.nodeList).then((res) => {
+        res.data.pageItems.forEach((pageAbstractItem: PageBrief) => {
+          this.pageAbstracts[pageAbstractItem.pageId.toString()] =
+            pageAbstractItem;
         });
       });
     },

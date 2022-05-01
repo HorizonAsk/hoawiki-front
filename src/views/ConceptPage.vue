@@ -33,11 +33,18 @@
             </h1>
           </template>
           <template #extra>
-            <a
-              :href="`/pages/${this.id}/edit`"
-              style="text-decoration: none; color: blue"
-              >编辑
-            </a>
+            <n-button @click="this.$router.push(`/pages/${this.id}/edit`)">
+              <n-icon>
+                <Edit />
+              </n-icon>
+              编辑
+            </n-button>
+            <n-button @click="this.$router.push(`/pagelinks/${this.id}`)">
+              <n-icon>
+                <Network4Reference />
+              </n-icon>
+              Link
+            </n-button>
             <span style="color: #909399">
               更新时间：{{ this.formatDate(this.updateTime) }}
             </span>
@@ -54,10 +61,11 @@ import { defineComponent, ref } from "vue";
 import { PageService } from "@/services/page.service";
 import PageToc from "@/components/Page/PageToc.vue";
 import { FluentDate } from "@/utils/datetimeFormat";
+import { Edit, Network4Reference } from "@vicons/carbon";
 
 export default defineComponent({
   name: "ConceptPage",
-  components: { PageToc },
+  components: { PageToc, Network4Reference, Edit },
   data: () => ({
     id: "",
     title: "",
