@@ -34,26 +34,10 @@ export default defineComponent({
   },
   data: function () {
     const currentItemsNumber = ref(0);
-    const columns = [
-      { title: "", key: "pageTitle" },
-      {
-        title: "",
-        key: "updateTime",
-      },
-      {
-        title: "",
-        key: "pageId",
-      },
-      {
-        title: "",
-        key: "content",
-      },
-    ];
     const loadingRef = ref(false);
     return {
       currentItemsNumber,
       currentPage: 1,
-      columns,
       loading: loadingRef,
       pageItems: [],
       end: false,
