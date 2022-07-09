@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/HorizonAsk/hoawiki-front/compare/v0.1.2...v0.2.0) (2022-07-09)
+
+
+### Features
+
+* **pagelink:** Add pagelink graph page. ([c39fa66](https://github.com/HorizonAsk/hoawiki-front/commit/c39fa66de1b0b20de5679e255be18a153a35b2e5))
+* **pagelink:** Link relationship diagram for pages with iterative depth. ([76a75a4](https://github.com/HorizonAsk/hoawiki-front/commit/76a75a44b3f49ff36372df6c49926eb7127b536a))
+* **pagelink:** Show page title and abstract on pagelink page. Add `link` button on conceptpage. ([a7e5baa](https://github.com/HorizonAsk/hoawiki-front/commit/a7e5baa87b8c1b054579b34e3465d109133f86aa))
+
 ### [0.1.2](https://github.com/HorizonAsk/hoawiki-front/compare/v0.1.1...v0.1.2) (2022-04-30)
 
 
